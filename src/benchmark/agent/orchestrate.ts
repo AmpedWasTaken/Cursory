@@ -46,7 +46,9 @@ export interface OrchestrateOptions {
 function variantEnv(variant: BenchmarkVariant): NodeJS.ProcessEnv {
   return {
     CURSORY_ENABLED: variant === "cursory" ? "1" : "0",
-    ...(variant === "baseline" ? { CURSORY_DISABLE_TAKEOVER: "1" } : {}),
+    ...(variant === "baseline"
+      ? { CURSORY_DISABLE_TAKEOVER: "1" }
+      : { CURSORY_CAP_PROFILE: "balanced" }),
   };
 }
 

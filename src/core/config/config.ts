@@ -43,11 +43,11 @@ export interface CursoryConfig {
 export const DEFAULT_CONFIG: CursoryConfig = {
   mode: "balanced",
   budgets: {
-    workspaceMap: 2000,
-    search: 3000,
-    read: 5000,
-    terminal: 4000,
-    diff: 4000,
+    workspaceMap: 1600,
+    search: 2200,
+    read: 3200,
+    terminal: 2800,
+    diff: 2800,
   },
   context: {
     maxInjectedTokens: 6000,

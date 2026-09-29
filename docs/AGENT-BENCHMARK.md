@@ -46,6 +46,9 @@ pnpm cursory disable   # docs for CURSORY_ENABLED=0
 The runner sets these per arm. Hooks and MCP tools both honor `CURSORY_ENABLED`.
 Legacy `CURSORY_DISABLE_TAKEOVER=1` still disables native caps.
 
+Native cap strength (hooks): `CURSORY_CAP_PROFILE=safe|balanced|aggressive`
+(default `balanced`: 4KB / 100-line reads, 20-hit greps, clamped context).
+
 ## Task definition
 
 `benchmarks/tasks/*.json`:

@@ -54,7 +54,7 @@ export function novelContext(text: string, allowRepeat = false, scope = "global"
 export function registerTools(server: McpServer): void {
   server.tool(
     "cursory_smart_search",
-    "Use automatically instead of broad/noisy Grep or recursive exploration. Searches source with ranked, bounded excerpts, ignores generated/vendor noise by default, and prevents large result floods. Prefer native search only for a known exact symbol in 1-3 files.",
+    "DEFAULT for repository search. Use instead of Grep/Glob/find exploration. Returns ranked, bounded excerpts and ignores vendor/generated noise. Native Grep only when you already know an exact symbol in 1–3 files.",
     {
       query: z.string().min(1).describe("Natural language or keyword search query"),
       max_results: z.number().int().positive().max(50).optional(),
@@ -88,7 +88,7 @@ export function registerTools(server: McpServer): void {
 
   server.tool(
     "cursory_smart_read",
-    "Use automatically instead of native Read for files over 500 lines, repeated reads, or when only a symbol/range is relevant. Returns exact bounded source with session dedupe. force_full on large files still returns a head plus get_raw. Prefer native Read for small targeted files.",
+    "DEFAULT for source reads when hunting a symbol, reviewing a range, or rereading a file. Returns exact bounded source with session dedupe. Prefer native Read only for tiny one-shot files you already located. Prefer get_raw over force_full.",
     {
       path: z
         .string()
@@ -131,7 +131,7 @@ export function registerTools(server: McpServer): void {
 
   server.tool(
     "cursory_smart_run",
-    "Use automatically instead of shell execution when tests, builds, logs, diffs, or other commands may produce long output. Returns a bounded failure-focused view and stores the full result for exact recovery. Prefer normal shell for short predictable output.",
+    "DEFAULT for tests, builds, logs, and git diffs. Returns a failure-focused bounded view and stores full raw for get_raw. Prefer normal Shell only for short predictable one-liners.",
     {
       command: z.string().min(1),
       cwd: z.string().optional().describe("Working directory under the workspace"),

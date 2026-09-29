@@ -5,11 +5,11 @@ import { CURSORY_NAME, CURSORY_PHASE, CURSORY_VERSION } from "../../src/core/con
 describe("config defaults", () => {
   it("uses balanced mode and documented budgets", () => {
     expect(DEFAULT_CONFIG.mode).toBe("balanced");
-    expect(DEFAULT_CONFIG.budgets.workspaceMap).toBe(2000);
-    expect(DEFAULT_CONFIG.budgets.search).toBe(3000);
-    expect(DEFAULT_CONFIG.budgets.read).toBe(5000);
-    expect(DEFAULT_CONFIG.budgets.terminal).toBe(4000);
-    expect(DEFAULT_CONFIG.budgets.diff).toBe(4000);
+    expect(DEFAULT_CONFIG.budgets.workspaceMap).toBe(1600);
+    expect(DEFAULT_CONFIG.budgets.search).toBe(2200);
+    expect(DEFAULT_CONFIG.budgets.read).toBe(3200);
+    expect(DEFAULT_CONFIG.budgets.terminal).toBe(2800);
+    expect(DEFAULT_CONFIG.budgets.diff).toBe(2800);
     expect(DEFAULT_CONFIG.context.maxInjectedTokens).toBe(6000);
     expect(DEFAULT_CONFIG.context.instructionsBudget).toBeLessThanOrEqual(150);
     expect(DEFAULT_CONFIG.context.allowRegression).toBe(false);

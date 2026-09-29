@@ -3,10 +3,12 @@ description: Automatic token bounds on every prompt.
 alwaysApply: true
 ---
 
-Cursory already caps large native Read/Grep/Shell. Treat a truncated result as intentional; continue with offset/range only if needed. Log/test dumps are tailed, not headed.
+Default to Cursory tools before native dumps:
+- search → `cursory_smart_search`
+- symbol/range/file reads → `cursory_smart_read`
+- tests/builds/logs/diffs → `cursory_smart_run`
+- missing lines → `cursory_get_raw` (not `force_full`)
 
-Prefer Cursory tools for ranked search, symbol reads, and verbose commands:
-`cursory_smart_search`, `cursory_smart_read`, `cursory_smart_run`, `cursory_get_raw`.
-Do not read the efficient-context skill. Expand with `get_raw`, not `force_full`. Omit `result_id` on `get_raw` to list stored dumps after compact.
-
-Do not call Cursory to announce or plan. Keep exact source; do not summarize to save tokens.
+Native Read/Grep/Shell may already be capped; treat truncation as intentional.
+Skip the efficient-context skill. Do not call Cursory just to announce or plan.
+Keep exact source — never summarize to save tokens.

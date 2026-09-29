@@ -37,6 +37,7 @@ import {
   recordOptimization,
   recordSmartRead,
 } from "../../core/telemetry/sessionStats.js";
+import { getCapLimits } from "../../hooks/capLimits.js";
 
 export interface SmartReadOptions {
   workspaceRoot: string;
@@ -64,9 +65,9 @@ export interface SmartReadResult {
   resultId?: string;
 }
 
-const SMALL_FILE_BYTES = 12_000;
-const SMALL_FILE_LINES = 250;
-const FORCE_FULL_HEAD_LINES = 200;
+const SMALL_FILE_BYTES = getCapLimits("balanced").smallFileBytes;
+const SMALL_FILE_LINES = 160;
+const FORCE_FULL_HEAD_LINES = getCapLimits("balanced").readLineLimit;
 
 function resolveSafePath(workspaceRoot: string, inputPath: string): string {
   const root = resolve(workspaceRoot);
