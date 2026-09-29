@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="320" viewBox="0 0 720 320" role="img" aria-label="Input token usage">
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text x="64" y="28" font-size="18" font-weight="700" fill="#0f172a" font-family="ui-sans-serif, system-ui, sans-serif">Input token usage</text>
+  <text x="64" y="46" font-size="12" fill="#64748b" font-family="ui-sans-serif, system-ui, sans-serif">Bug fix · expired session redirect · 2 runs · composer-2.5</text>
+  <text x="688" y="28" text-anchor="end" font-size="14" font-weight="700" fill="#059669" font-family="ui-sans-serif, system-ui, sans-serif">-5.0%</text>
+  <text x="688" y="46" text-anchor="end" font-size="11" fill="#64748b" font-family="ui-sans-serif, system-ui, sans-serif">vs baseline avg</text>
+  <line x1="64" y1="200" x2="688" y2="200" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54" y="204" text-anchor="end" font-size="11" fill="#64748b" font-family="ui-sans-serif, system-ui, sans-serif">4.08k</text>
+<line x1="64" y1="152" x2="688" y2="152" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54" y="156" text-anchor="end" font-size="11" fill="#64748b" font-family="ui-sans-serif, system-ui, sans-serif">8.16k</text>
+<line x1="64" y1="104" x2="688" y2="104" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54" y="108" text-anchor="end" font-size="11" fill="#64748b" font-family="ui-sans-serif, system-ui, sans-serif">12.2k</text>
+<line x1="64" y1="56" x2="688" y2="56" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54" y="60" text-anchor="end" font-size="11" fill="#64748b" font-family="ui-sans-serif, system-ui, sans-serif">16.3k</text>
+  <line x1="64" y1="248" x2="688" y2="248" stroke="#94a3b8" stroke-width="1.5"/>
+  <rect x="220" y="56" width="96" height="192" rx="6" fill="#64748b"/>
+  <rect x="436" y="65.59058592792351" width="96" height="182.4094140720765" rx="6" fill="#0d9488"/>
+  <line x1="268" y1="56" x2="268" y2="56" stroke="#64748b" stroke-width="2" opacity="0.55"/>
+<line x1="258" y1="56" x2="278" y2="56" stroke="#64748b" stroke-width="2" opacity="0.55"/>
+<line x1="258" y1="56" x2="278" y2="56" stroke="#64748b" stroke-width="2" opacity="0.55"/>
+  <line x1="484" y1="65.59058592792351" x2="484" y2="65.59058592792351" stroke="#0d9488" stroke-width="2" opacity="0.55"/>
+<line x1="474" y1="65.59058592792351" x2="494" y2="65.59058592792351" stroke="#0d9488" stroke-width="2" opacity="0.55"/>
+<line x1="474" y1="65.59058592792351" x2="494" y2="65.59058592792351" stroke="#0d9488" stroke-width="2" opacity="0.55"/>
+  <text x="268" y="48" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a" font-family="ui-sans-serif, system-ui, sans-serif">16.3k</text>
+  <text x="484" y="57.59058592792351" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a" font-family="ui-sans-serif, system-ui, sans-serif">15.5k</text>
+  <text x="268" y="270" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a" font-family="ui-sans-serif, system-ui, sans-serif">Baseline</text>
+  <text x="268" y="288" text-anchor="middle" font-size="11" fill="#64748b" font-family="ui-sans-serif, system-ui, sans-serif">n=1</text>
+  <text x="484" y="270" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a" font-family="ui-sans-serif, system-ui, sans-serif">Cursory</text>
+  <text x="484" y="288" text-anchor="middle" font-size="11" fill="#64748b" font-family="ui-sans-serif, system-ui, sans-serif">n=1</text>
+  <text x="360" y="308" text-anchor="middle" font-size="11" fill="#64748b" font-family="ui-sans-serif, system-ui, sans-serif">Bars = mean · whiskers = min–max across runs</text>
+</svg>

@@ -1,102 +1,102 @@
 {
-  "generatedAt": "2026-09-29T07:43:03.515Z",
+  "generatedAt": "2026-09-29T07:59:24.940Z",
   "schemaVersion": 1,
   "benchmarks": {
-    "standard-prompt": {
+    "fix-session-redirect": {
       "benchmark": {
-        "id": "standard-prompt",
-        "label": "Composer 2.5 · standard prompt"
+        "id": "fix-session-redirect",
+        "label": "Bug fix · expired session redirect"
       },
       "environment": {
         "editors": [
-          "Cursor"
+          "Cursor CLI"
         ],
         "models": [
-          "Composer 2.5"
+          "composer-2.5"
         ],
         "cursoryVersions": [
           "0.1.0"
         ]
       },
       "runs": {
-        "baseline": 10,
-        "cursory": 10
+        "baseline": 1,
+        "cursory": 1
       },
       "average": {
         "baseline": {
-          "inputTokens": 10234,
-          "outputTokens": 421,
-          "cacheReadTokens": 24500,
-          "durationMs": 12800
+          "inputTokens": 16316,
+          "outputTokens": 1114,
+          "cacheReadTokens": 101562,
+          "durationMs": 117984
         },
         "cursory": {
-          "inputTokens": 8120,
-          "outputTokens": 417,
-          "cacheReadTokens": 19300,
-          "durationMs": 9100
+          "inputTokens": 15501,
+          "outputTokens": 1353,
+          "cacheReadTokens": 101216,
+          "durationMs": 124678
         }
       },
       "median": {
         "baseline": {
-          "inputTokens": 10311,
-          "outputTokens": 422.5,
-          "cacheReadTokens": 24683.5,
-          "durationMs": 12905.5
+          "inputTokens": 16316,
+          "outputTokens": 1114,
+          "cacheReadTokens": 101562,
+          "durationMs": 117984
         },
         "cursory": {
-          "inputTokens": 8181,
-          "outputTokens": 418.5,
-          "cacheReadTokens": 19444.5,
-          "durationMs": 9175
+          "inputTokens": 15501,
+          "outputTokens": 1353,
+          "cacheReadTokens": 101216,
+          "durationMs": 124678
         }
       },
       "min": {
         "baseline": {
-          "inputTokens": 9415,
-          "outputTokens": 408,
-          "cacheReadTokens": 22540,
-          "durationMs": 11674
+          "inputTokens": 16316,
+          "outputTokens": 1114,
+          "cacheReadTokens": 101562,
+          "durationMs": 117984
         },
         "cursory": {
-          "inputTokens": 7470,
-          "outputTokens": 404,
-          "cacheReadTokens": 17756,
-          "durationMs": 8299
+          "inputTokens": 15501,
+          "outputTokens": 1353,
+          "cacheReadTokens": 101216,
+          "durationMs": 124678
         }
       },
       "max": {
         "baseline": {
-          "inputTokens": 10848,
-          "outputTokens": 431,
-          "cacheReadTokens": 25970,
-          "durationMs": 13645
+          "inputTokens": 16316,
+          "outputTokens": 1114,
+          "cacheReadTokens": 101562,
+          "durationMs": 117984
         },
         "cursory": {
-          "inputTokens": 8607,
-          "outputTokens": 427,
-          "cacheReadTokens": 20458,
-          "durationMs": 9701
+          "inputTokens": 15501,
+          "outputTokens": 1353,
+          "cacheReadTokens": 101216,
+          "durationMs": 124678
         }
       },
       "stdDev": {
         "baseline": {
-          "inputTokens": 453.4,
-          "outputTokens": 7.3,
-          "cacheReadTokens": 1084.9,
-          "durationMs": 623.4
+          "inputTokens": 0,
+          "outputTokens": 0,
+          "cacheReadTokens": 0,
+          "durationMs": 0
         },
         "cursory": {
-          "inputTokens": 359.7,
-          "outputTokens": 7.3,
-          "cacheReadTokens": 854.7,
-          "durationMs": 443.3
+          "inputTokens": 0,
+          "outputTokens": 0,
+          "cacheReadTokens": 0,
+          "durationMs": 0
         }
       },
       "change": {
-        "inputTokensPercent": -20.66,
-        "outputTokensPercent": -0.95,
-        "cacheReadTokensPercent": -21.22,
-        "durationPercent": -28.91
+        "inputTokensPercent": -5,
+        "outputTokensPercent": 21.45,
+        "cacheReadTokensPercent": -0.34,
+        "durationPercent": 5.67
       }
     }
   }
