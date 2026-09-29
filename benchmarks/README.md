@@ -1,11 +1,19 @@
-# Live usage benchmarks
+# Benchmarks
 
-Raw Cursor dashboard runs live here. Charts in `assets/benchmarks/` are generated — do not hand-edit them.
+Two layers:
+
+1. **Cursor Agent A/B** (`pnpm cursory benchmark`) — real `agent -p` runs with/without Cursory  
+2. **Chart pipeline** (`pnpm bench:charts`) — aggregates `runs/*.json` into README SVGs  
+
+See [docs/AGENT-BENCHMARK.md](../docs/AGENT-BENCHMARK.md).
 
 ```text
 benchmarks/
-├── runs/                 # one JSON file per agent run
-├── summary.json          # averages, median, min/max, stdDev, % change
+├── tasks/                 # task definitions (prompt, repo, verification)
+├── fixtures/              # small repos exercised by tasks
+├── runs/                  # one JSON file per agent arm (chart input)
+├── results/               # full A/B reports
+├── summary.json           # generated aggregates
 └── generate-charts.ts
 assets/benchmarks/
 ├── tokens.svg
@@ -13,54 +21,34 @@ assets/benchmarks/
 └── cache.svg
 ```
 
-## Record a run
-
-Copy numbers from the Cursor usage dashboard after an Agent chat:
+## Agent A/B (preferred)
 
 ```bash
-pnpm bench:record -- \
-  --variant cursory \
-  --id standard-prompt \
-  --label "Composer 2.5 · standard prompt" \
-  --model "Composer 2.5" \
-  --input 9119 \
-  --output 453 \
-  --cache 20430 \
-  --duration 14900
-```
-
-Use `--variant baseline` for the matching Cursory-off run (same prompt, same model).
-
-## Regenerate charts
-
-```bash
+pnpm build && pnpm install:local
+pnpm cursory benchmark fix-session-redirect --runs 3
+# without Cursor CLI installed:
+pnpm cursory benchmark fix-session-redirect --dry-run --runs 2
 pnpm bench:charts
 ```
 
-## Sample data
+Both arms go through Cursor Agent. The runner sets:
 
-`pnpm bench:seed` writes a deterministic 10× baseline + 10× cursory set so CI and README charts stay reproducible. Replace those files with real dashboard captures as you collect them.
+| Arm | Env | Workspace MCP |
+| --- | --- | --- |
+| baseline | `CURSORY_ENABLED=0` | empty |
+| cursory | `CURSORY_ENABLED=1` | Cursory MCP → plugin `dist/index.js` |
 
-## Run schema
+Each arm gets an isolated git worktree at the same commit.
 
-```json
-{
-  "benchmark": {
-    "id": "simple-refactor",
-    "label": "Simple refactor"
-  },
-  "environment": {
-    "editor": "Cursor",
-    "model": "Composer 2.5",
-    "cursoryVersion": "0.1.0"
-  },
-  "variant": "cursory",
-  "metrics": {
-    "inputTokens": 9119,
-    "outputTokens": 453,
-    "cacheReadTokens": 20430,
-    "durationMs": 14900
-  },
-  "timestamp": "2026-09-29T09:30:00Z"
-}
+## Manual dashboard capture
+
+Still supported if you prefer recording Cursor UI usage numbers:
+
+```bash
+pnpm bench:record -- --variant cursory --input 9119 --output 453 --cache 20430 --duration 14900
+pnpm bench:charts
 ```
+
+## Sample seed data
+
+`pnpm bench:seed` writes a deterministic 10×10 set for chart plumbing. Prefer real `cursory benchmark` output when available.

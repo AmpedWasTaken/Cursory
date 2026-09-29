@@ -1,0 +1,10 @@
+{
+  "id": "symbol-hunt",
+  "label": "Codebase understanding · refreshToken",
+  "repo": "test/fixtures/mini-repo",
+  "commit": "",
+  "model": "composer-2.5",
+  "prompt": "Where is refreshToken defined, and what does it return? Cite the exact function. Do not refactor or edit files.",
+  "expectText": "refreshToken",
+  "runs": 3
+}

@@ -1,6 +1,12 @@
 # Live eval (Cursory on vs off)
 
-This is the first real-model test. It is not `pnpm benchmark`.
+Prefer the automated Agent A/B runner when the Cursor CLI is installed:
+
+```bash
+pnpm cursory benchmark fix-session-redirect --runs 3
+```
+
+This scorecard is the manual fallback. It is not `pnpm benchmark` (offline fixtures).
 
 ## Why this shape
 

@@ -1,0 +1,8 @@
+{
+  "name": "session-auth-fixture",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/session.test.js"
+  }
+}

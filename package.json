@@ -231,12 +231,14 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "benchmark": "tsx scripts/benchmark.ts",
+    "benchmark:agent": "tsx src/cli/index.ts benchmark",
     "bench:record": "tsx scripts/record-benchmark-run.ts",
     "bench:seed": "tsx scripts/seed-benchmark-runs.ts",
     "bench:charts": "tsx benchmarks/generate-charts.ts",
     "eval:live": "tsx scripts/live-eval-summary.ts",
     "install:local": "tsx scripts/install-local.ts",
-    "dev:mcp": "tsx src/index.ts"
+    "dev:mcp": "tsx src/index.ts",
+    "cursory": "tsx src/cli/index.ts"
   },
   "keywords": [
     "cursor",

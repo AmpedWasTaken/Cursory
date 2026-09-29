@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { isCursoryEnabled } from "../core/runtime/enabled.js";
 import { appendLiveEvalEvent, liveEvalEventFromHook } from "../core/telemetry/liveEval.js";
 import { optimizeNativeTool } from "./nativeTakeover.js";
 import { runHook } from "./io.js";
@@ -8,11 +9,11 @@ import { runHook } from "./io.js";
  * Returns only `permission` and optional `updated_input` — never conversation text.
  */
 runHook((input) => {
-  const disable = process.env.CURSORY_DISABLE_TAKEOVER === "1";
+  const enabled = isCursoryEnabled();
   const out = optimizeNativeTool(input);
-  const applied = Boolean(out.updated_input) && !disable;
+  const applied = Boolean(out.updated_input) && enabled;
   appendLiveEvalEvent(liveEvalEventFromHook(input, out, applied));
-  if (disable) {
+  if (!enabled) {
     return { permission: "allow" };
   }
   return out;

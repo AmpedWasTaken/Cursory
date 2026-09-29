@@ -2,6 +2,7 @@ import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { getContextCache } from "../context/ContextCache.js";
 import { detectDuplicateBlocks } from "../context/DuplicateDetector.js";
+import { isCursoryEnabled } from "../core/runtime/enabled.js";
 import { estimateTokensFromText } from "../core/telemetry/estimator.js";
 import { recordDuplicateBytesAvoided, recordOptimization } from "../core/telemetry/sessionStats.js";
 import { resolveWorkspaceRoot } from "../core/workspace/resolveWorkspaceRoot.js";
@@ -9,6 +10,18 @@ import { buildGetRaw } from "./tools/getRaw.js";
 import { buildSmartRead } from "./tools/smartRead.js";
 import { buildSmartRun } from "./tools/smartRun.js";
 import { buildSmartSearch } from "./tools/smartSearch.js";
+
+function disabledToolResult() {
+  return {
+    content: [
+      {
+        type: "text" as const,
+        text: "[cursory:disabled] CURSORY_ENABLED=0 — use native Cursor tools for this baseline run.",
+      },
+    ],
+    isError: true,
+  };
+}
 
 export function novelContext(text: string, allowRepeat = false, scope = "global"): string {
   if (allowRepeat) return text;
@@ -53,6 +66,7 @@ export function registerTools(server: McpServer): void {
         .describe("Folder Cursor has open. Never the Cursory plugin install path."),
     },
     async (args) => {
+      if (!isCursoryEnabled()) return disabledToolResult();
       const workspaceRoot = resolveWorkspaceRoot(args.workspace_root);
       const result = buildSmartSearch({
         workspaceRoot,
@@ -92,6 +106,7 @@ export function registerTools(server: McpServer): void {
         .describe("Folder Cursor has open. Never the Cursory plugin install path."),
     },
     async (args) => {
+      if (!isCursoryEnabled()) return disabledToolResult();
       const workspaceRoot = resolveWorkspaceRoot(args.workspace_root, args.path);
       const result = buildSmartRead({
         workspaceRoot,
@@ -129,6 +144,7 @@ export function registerTools(server: McpServer): void {
         .describe("Folder Cursor has open. Never the Cursory plugin install path."),
     },
     async (args) => {
+      if (!isCursoryEnabled()) return disabledToolResult();
       const workspaceRoot = resolveWorkspaceRoot(args.workspace_root, args.cwd);
       const result = await buildSmartRun({
         workspaceRoot,
@@ -164,6 +180,7 @@ export function registerTools(server: McpServer): void {
         .describe("Folder Cursor has open. Never the Cursory plugin install path."),
     },
     async (args) => {
+      if (!isCursoryEnabled()) return disabledToolResult();
       const workspaceRoot = resolveWorkspaceRoot(args.workspace_root);
       const result = buildGetRaw({
         workspaceRoot,

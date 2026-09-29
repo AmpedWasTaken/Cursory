@@ -1,0 +1,13 @@
+{
+  "id": "fix-session-redirect",
+  "label": "Bug fix · expired session redirect",
+  "repo": "benchmarks/fixtures/session-auth",
+  "commit": "",
+  "model": "composer-2.5",
+  "prompt": "There is a bug where expired sessions do not redirect to login. Find the problem in src/session.js and fix it. Run the tests when finished (`npm test`). Do not refactor unrelated code.",
+  "verification": {
+    "command": "npm test",
+    "timeoutMs": 60000
+  },
+  "runs": 3
+}

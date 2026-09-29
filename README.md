@@ -13,7 +13,20 @@ Send the minimum context needed to solve the task. Keep a progressive path back 
 
 ## Benchmarks
 
-Charts are generated from raw runs in [`benchmarks/runs/`](benchmarks/runs/) — mean bars, min–max whiskers, and n per variant so a single lucky chat cannot stand alone. Regenerate with `pnpm bench:charts`. See [`benchmarks/README.md`](benchmarks/README.md) to record new Cursor dashboard captures (`pnpm bench:record`).
+Charts come from repeated **Cursor Agent** A/B runs (same prompt, same model, isolated git worktrees) — not GUI automation.
+
+```bash
+pnpm build && pnpm install:local
+pnpm cursory benchmark fix-session-redirect --runs 3
+pnpm bench:charts
+```
+
+```text
+baseline:  CURSORY_ENABLED=0  agent -p "..." --output-format stream-json
+cursory:   CURSORY_ENABLED=1  agent -p "..." --output-format stream-json
+```
+
+See [docs/AGENT-BENCHMARK.md](docs/AGENT-BENCHMARK.md).
 
 ### Token usage
 
@@ -28,11 +41,12 @@ Charts are generated from raw runs in [`benchmarks/runs/`](benchmarks/runs/) —
 ![Cache benchmark](./assets/benchmarks/cache.svg)
 
 ```bash
-pnpm bench:record -- --variant cursory --input 9119 --output 453 --cache 20430 --duration 14900
+pnpm cursory benchmark --list
+pnpm cursory benchmark --dry-run --runs 2    # no agent binary required
 pnpm bench:charts
 ```
 
-There is also an offline fixture suite (`pnpm benchmark`) that checks context reduction + 100% raw recoverability on synthetic tasks. That suite estimates delivered text (~4 chars/token); the charts above use Cursor usage metrics from repeated baseline vs Cursory agent runs.
+Offline fixture estimates (`pnpm benchmark`) still validate progressive disclosure + 100% raw recoverability. Live charts prefer Agent CLI metrics (or dashboard captures via `pnpm bench:record`).
 
 ---
 
@@ -107,10 +121,10 @@ Editor settings (sidebar, optimization mode, budgets) are also available under *
 ## Reproduce the numbers
 
 ```bash
-pnpm bench:charts       # aggregate runs → summary.json + SVG charts
-pnpm benchmark          # offline fixture suite (context estimates + recoverability)
+pnpm cursory benchmark fix-session-redirect --runs 3
+pnpm bench:charts
+pnpm benchmark          # offline fixture suite
 pnpm test
-pnpm eval:live          # hook activity helper — see eval/SCORECARD.md
 ```
 
 Live Cursor cannot replace the host conversation from a plugin. Offline scenarios may use replacement semantics for measurement; in live Cursor savings come from choosing a bounded Cursory path instead of a raw dump.
@@ -140,7 +154,8 @@ Live Cursor cannot replace the host conversation from a plugin. Offline scenario
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | System shape and optimization priority |
 | [docs/CURSOR-INTEGRATION.md](docs/CURSOR-INTEGRATION.md) | Install, hooks, MCP, troubleshooting |
 | [docs/cursor-api.md](docs/cursor-api.md) | Documented Cursor surfaces only |
-| [eval/SCORECARD.md](eval/SCORECARD.md) | Live on/off eval protocol |
+| [docs/AGENT-BENCHMARK.md](docs/AGENT-BENCHMARK.md) | Cursor Agent A/B runner |
+| [eval/SCORECARD.md](eval/SCORECARD.md) | Manual live scorecard |
 
 ## License
 
