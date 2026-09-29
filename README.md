@@ -1,48 +1,90 @@
 # Cursory
 
-Local-first **Cursor Plugin** that reduces unnecessary LLM context/token consumption while preserving developer productivity and answer quality.
+**Local-first Cursor plugin that cuts unnecessary LLM context — without guessing, summarizing, or throwing away the raw answer.**
 
-> Send the minimum amount of context necessary to solve the task, while preserving a progressive path to the exact raw information when needed.
+Send the minimum context needed to solve the task. Keep a progressive path back to the exact file, log, or diff when the model needs more.
 
-**Status:** Phase 9 — benchmarks complete (baseline vs Cursory + recoverability).
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Node.js 20+](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](package.json)
+[![pnpm](https://img.shields.io/badge/pnpm-10-orange.svg)](package.json)
+[![Benchmark](https://img.shields.io/badge/bench-98.3%25%20tokens%20avoided-success.svg)](#proof-benchmark)
 
-**Cursory estimates context avoided. These estimates are not the same thing as Cursor billing usage.**
+---
+
+## Proof (benchmark)
+
+Run it yourself:
+
+```bash
+pnpm install
+pnpm benchmark
+```
+
+Latest local run on the built-in fixture suite (**12/12 tasks solved**, **100% raw recoverability**):
+
+| Scenario | Baseline | Cursory | Avoided |
+| --- | ---: | ---: | ---: |
+| Simple edit | 3,911 | 52 | **98.7%** |
+| Bug fix | 3,972 | 116 | **97.1%** |
+| Multi-file feature | 3,994 | 136 | **96.6%** |
+| Follow-up | 3,976 | 120 | **97.0%** |
+| Long conversation | 116,432 | 124 | **99.9%** |
+| Large codebase context | 65,864 | 88 | **99.9%** |
+| Repository discovery | 33 | 33 | 0.0% |
+| Large test output | 3,568 | 170 | **95.2%** |
+| Large log | 2,566 | 116 | **95.5%** |
+| Relevant code read | 3,494 | 188 | **94.6%** |
+| Repeated file read | 69 | 28 | **59.4%** |
+| Large git diff | 5,275 | 2,369 | **55.1%** |
+| **TOTAL** | **213,154** | **3,540** | **98.3%** |
+
+What “passed” means:
+
+- Every scenario still solves the fixture task (symbols, failures, markers stay visible)
+- Raw recovery checks are exact: store round-trip, `get_raw` search, `force_full` source
+- Pipeline scenarios also keep latency low (long conversation ~tens of ms on a laptop)
+
+> **Estimates vs billing.** Numbers use a ~4 chars/token heuristic on delivered text. They measure **context avoided before it hits the model**, not Cursor dashboard dollars. We do not claim invoice savings without live billing data.
+
+---
+
+## Why it works
+
+Most agent waste is deterministic: full trees, repeated files, noisy test logs, huge diffs, irrelevant docs. Cursory attacks that first — ignore rules, hashing/dedupe, Git-aware ranking, exact search, and bounded progressive output — then exposes smaller MCP tools the agent can prefer over dumping everything into the chat.
+
+```text
+Native Read / Grep / Shell  ──preToolUse──►  silently capped inputs
+Agent needs ranked / symbol / verbose work  ──MCP──►  smart_* tools
+Bounded output still insufficient           ──MCP──►  get_raw / force_full
+```
+
+Hooks never append steering messages or duplicate context into the conversation. Savings come from **smaller host operations**, not from rewriting history.
 
 ## What it does
 
-- Prefer deterministic waste reduction: ignore rules, dedupe, hashing, Git awareness, exact search, bounded progressive output
-- Expose MCP tools the Agent can use instead of dumping huge trees/logs/diffs
-- Keep raw recoverability (`get_raw` / `force_full` in later phases)
-- Stay local: no cloud backend, no default external telemetry, no Cursor auth token requirement
+- Caps large native **Read / Grep / Shell** inputs via `preToolUse` `updated_input`
+- Serves ranked search, symbol/range reads, and reduced command/diff/log output over MCP
+- Dedupes session content with SHA-256 hashing and range/symbol cache hits
+- Keeps raw recoverability (`cursory_get_raw`, `force_full`) so compression is never one-way
+- Stays local: no cloud backend, no default telemetry, no Cursor auth token required
 
-## What it does NOT do
+## What it does **not** do
 
-- Blindly summarize or rewrite source code
+- Blindly summarize or rewrite your source with an LLM
 - Patch Cursor binaries or intercept model traffic
 - Claim exact dollar savings without measurable billing data
 - Permanently discard command/file output
-- Block ordinary small reads or shell commands via hooks
+- Block ordinary small reads or shell commands
 
-## Architecture
+---
 
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/CURSOR-INTEGRATION.md](docs/CURSOR-INTEGRATION.md), and [docs/cursor-api.md](docs/cursor-api.md).
+## Install (development)
 
-Primary path: **silent native bounds** (`preToolUse` `updated_input` on
-Read/Grep/Shell) plus **MCP stdio** for ranked/symbol/verbose work. Hooks never
-append messages or supporting context to the conversation.
-
-## Requirements
-
-- Node.js 20+
-- pnpm 9+ (repo uses pnpm 10)
-- Cursor with local plugin imports allowed
-
-## Quick start (development)
+**Requirements:** Node.js 20+, pnpm 9+ (repo uses pnpm 10), Cursor with local plugin imports.
 
 ```bash
 pnpm install
 pnpm typecheck
-pnpm lint
 pnpm test
 pnpm build
 pnpm install:local
@@ -50,85 +92,69 @@ pnpm install:local
 
 Then in Cursor: **Developer: Reload Window** → **Customize** → confirm plugin **cursory**.
 
-### Local install paths
-
-| OS            | Path                                          |
-| ------------- | --------------------------------------------- |
-| Windows       | `%USERPROFILE%\.cursor\plugins\local\cursory` |
-| macOS / Linux | `~/.cursor/plugins/local/cursory`             |
-
-## How Cursor uses it (Phase 7)
-
-After `pnpm install:local` + reload:
-
-- A compact always-on rule; no slash command is required
-- `preToolUse` silently caps large native Read/Grep/Shell inputs
-- Observe-only lifecycle hooks; they do not inject `additional_context` or
-  `agent_message` text
-- Four MCP tools for ranked search, symbol reads, verbose commands, and recovery
+| OS | Install path |
+| --- | --- |
+| Windows | `%USERPROFILE%\.cursor\plugins\local\cursory` |
+| macOS / Linux | `~/.cursor/plugins/local\cursory` |
 
 ## Default tools
 
-| Tool                   | Automatic use                                      |
-| ---------------------- | -------------------------------------------------- |
-| `cursory_smart_search` | Broad or noisy repository searches                 |
-| `cursory_smart_read`   | Large, repeated, symbol, or range reads            |
-| `cursory_smart_run`    | Verbose tests, builds, logs, and diffs             |
-| `cursory_get_raw`      | Exact recovery when bounded output is insufficient |
+| Tool | When the agent should use it |
+| --- | --- |
+| `cursory_smart_search` | Broad or noisy repository searches |
+| `cursory_smart_read` | Large, repeated, symbol, or range reads |
+| `cursory_smart_run` | Verbose tests, builds, logs, and diffs |
+| `cursory_get_raw` | Exact recovery when bounded output is not enough |
 
-The smaller surface reduces idle schema overhead and gives the model clearer
-routing choices. Small targeted operations stay on native Cursor tools.
+Small targeted operations stay on native Cursor tools. The smaller MCP surface reduces idle schema overhead and makes routing clearer.
 
 ## Configuration
 
-Copy `cursory.config.example.json` to `cursory.config.json` (loading lands in Phase 2).
+Copy [`cursory.config.example.json`](cursory.config.example.json) to `cursory.config.json`.
 
 Default mode: `balanced`. Modes never disable raw expansion.
 
+Editor settings (sidebar, optimization mode, budgets) are also available under **Cursory: Open Settings**.
+
+## Reproduce the numbers
+
+```bash
+pnpm benchmark          # offline fixture suite (table above)
+pnpm test               # includes the same pass criteria in CI
+pnpm eval:live          # optional live scorecard helper — see eval/SCORECARD.md
+```
+
+The offline suite covers simple edits, bug fixes, multi-file features, follow-ups, long conversations, large project context, discovery, tests, logs, reads, cache hits, and diffs.
+
+Live Cursor cannot replace the host conversation from a plugin. Offline scenarios may use replacement semantics for measurement; in live Cursor the safe strategy is **no unsolicited injection** — savings come from choosing a bounded Cursory path instead of the raw dump.
+
 ## Privacy
 
-- Local-first
-- No analytics server by default
-- No code uploads / external APIs in v1
-- Session metrics stay local under the OS data directory:
+- Local-first; no analytics server by default
+- No code uploads / external APIs in the default path
+- Session metrics stay under the OS data directory:
   - Windows: `%LOCALAPPDATA%\cursory`
   - macOS: `~/Library/Application Support/cursory`
   - Linux: `~/.local/share/cursory` (or `$XDG_DATA_HOME/cursory`)
   - Override: `CURSORY_DATA_DIR`
-- Raw terminal spill is temporary with TTL (Phase 4)
+- Raw terminal spill is temporary (TTL)
 
-## Benchmarks
-
-```bash
-pnpm benchmark
-```
-
-Compares naive baseline vs Cursory delivered estimates across twelve scenarios,
-plus **raw recoverability** and **task success**. Numbers are estimates
-(~4 chars/token), not Cursor billing.
-
-The context regression suite also covers simple edits, bug fixes, multi-file
-features, follow-ups, long conversations, and large project context. Cursory
-uses replacement semantics in these offline scenarios. In live Cursor, where a
-plugin cannot replace the host conversation, the safe strategy is no
-unsolicited context injection; savings come from choosing a bounded Cursory
-tool instead of the corresponding raw operation.
-
-## Limitations (Phase 9)
+## Limitations
 
 - Active AST engine is the TypeScript compiler API (portable)
-- Tree-sitter adapter is optional and soft-disabled until grammars are wired
-- Vue/PHP/Python still use regex fallback
-- Benchmark fixtures are synthetic / local — not a substitute for live Cursor agent evals
+- Tree-sitter adapter is optional until grammars are wired
+- Vue / PHP / Python still use regex fallback
+- Fixture benchmarks are synthetic/local — pair with live agent evals before claiming production savings
 
-## Troubleshooting
+## Docs
 
-See [docs/CURSOR-INTEGRATION.md](docs/CURSOR-INTEGRATION.md).
-
-## Marketplace preparation
-
-Follow Cursor’s plugin submission checklist when Phase 9 is reached. Do not invent undocumented APIs.
+| Doc | Contents |
+| --- | --- |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | System shape and optimization priority |
+| [docs/CURSOR-INTEGRATION.md](docs/CURSOR-INTEGRATION.md) | Install, hooks, MCP, troubleshooting |
+| [docs/cursor-api.md](docs/cursor-api.md) | Documented Cursor surfaces only |
+| [eval/SCORECARD.md](eval/SCORECARD.md) | Live on/off eval protocol |
 
 ## License
 
-MIT
+[MIT](LICENSE)
