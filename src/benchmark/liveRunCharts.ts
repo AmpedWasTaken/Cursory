@@ -229,18 +229,23 @@ export function renderSavingsPercentSvg(
     {
       label: "Token usage",
       pct: summary.change.inputTokensPercent,
+      higherIsBetter: false,
     },
     {
       label: "Cost",
       pct: percentChange(mean(baseline.map(costOf)), mean(cursory.map(costOf))),
+      higherIsBetter: false,
     },
     {
       label: "Duration",
       pct: summary.change.durationPercent,
+      higherIsBetter: false,
     },
     {
       label: "Cache read",
       pct: summary.change.cacheReadTokensPercent,
+      // More cache hits usually means cheaper reuse of prompt prefix.
+      higherIsBetter: true,
     },
   ];
 
@@ -254,7 +259,7 @@ export function renderSavingsPercentSvg(
     .map((row, i) => {
       const y = padT + i * rowH;
       const w = (Math.abs(row.pct) / maxAbs) * 420;
-      const color = changeColor(row.pct);
+      const color = changeColor(row.pct, row.higherIsBetter);
       return `
   <text x="28" y="${y + 18}" font-size="13" fill="${TEXT}" font-family="${FONT}">${escapeXml(row.label)}</text>
   <rect x="160" y="${y + 4}" width="${Math.max(w, 4)}" height="22" rx="4" fill="${color}" opacity="0.9"/>
@@ -265,7 +270,7 @@ export function renderSavingsPercentSvg(
   const h = headlinesFrom(summary, runs);
   const body = `
   <text x="28" y="40" font-size="18" font-weight="700" fill="${TEXT}" font-family="${FONT}">Savings vs Cursor</text>
-  <text x="28" y="58" font-size="12" fill="${MUTED}" font-family="${FONT}">${escapeXml(h.subtitle)} · negative = Cursory used less</text>
+  <text x="28" y="58" font-size="12" fill="${MUTED}" font-family="${FONT}">${escapeXml(h.subtitle)} · green = better (less tokens/cost/latency, more cache)</text>
   ${rowsSvg}`;
   return svgShell(width, height, "Savings vs Cursor", body);
 }
