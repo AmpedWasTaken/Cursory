@@ -1,0 +1,122 @@
+<svg width="1200" height="360" viewBox="0 0 1200 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Background -->
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="360">
+      <stop offset="0%" stop-color="#050807"></stop>
+      <stop offset="50%" stop-color="#07100C"></stop>
+      <stop offset="100%" stop-color="#040706"></stop>
+    </linearGradient>
+
+    <!-- Green glow -->
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(600 180) rotate(90) scale(220 560)">
+      <stop stop-color="#22C55E" stop-opacity="0.14"></stop>
+      <stop offset="0.55" stop-color="#16A34A" stop-opacity="0.05"></stop>
+      <stop offset="1" stop-color="#16A34A" stop-opacity="0"></stop>
+    </radialGradient>
+
+    <!-- Grid -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1C3327" stroke-width="1" stroke-opacity="0.42"></path>
+    </pattern>
+
+    <!-- Fine grid -->
+    <pattern id="fineGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+      <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#15231B" stroke-width="0.5" stroke-opacity="0.18"></path>
+    </pattern>
+
+    <!-- Text glow -->
+    <filter id="textGlow" x="-30%" y="-50%" width="160%" height="200%">
+      <feGaussianBlur stdDeviation="7" result="blur"></feGaussianBlur>
+      <feFlood flood-color="#22C55E" flood-opacity="0.35"></feFlood>
+      <feComposite in2="blur" operator="in"></feComposite>
+      <feMerge>
+        <feMergeNode></feMergeNode>
+        <feMergeNode in="SourceGraphic"></feMergeNode>
+      </feMerge>
+    </filter>
+
+    <filter id="dotGlow" x="-300%" y="-300%" width="700%" height="700%">
+      <feGaussianBlur stdDeviation="5"></feGaussianBlur>
+    </filter>
+
+    <!-- Border -->
+    <linearGradient id="border" x1="0" y1="0" x2="1200" y2="360">
+      <stop stop-color="#183324"></stop>
+      <stop offset="0.5" stop-color="#2A5A3B"></stop>
+      <stop offset="1" stop-color="#183324"></stop>
+    </linearGradient>
+
+    <!-- Fade grid near edges -->
+    <linearGradient id="edgeFade" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="white" stop-opacity="0"></stop>
+      <stop offset="0.15" stop-color="white"></stop>
+      <stop offset="0.85" stop-color="white"></stop>
+      <stop offset="1" stop-color="white" stop-opacity="0"></stop>
+    </linearGradient>
+
+    <mask id="gridMask">
+      <rect width="1200" height="360" fill="url(#edgeFade)"></rect>
+    </mask>
+  </defs>
+
+  <!-- Main background -->
+  <rect x="1" y="1" width="1198" height="358" rx="22" fill="url(#bg)" stroke="url(#border)" stroke-width="2"></rect>
+
+  <!-- Grid -->
+  <g mask="url(#gridMask)">
+    <rect x="0" y="0" width="1200" height="360" fill="url(#fineGrid)"></rect>
+    <rect x="0" y="0" width="1200" height="360" fill="url(#grid)"></rect>
+  </g>
+
+  <!-- Center glow -->
+  <rect width="1200" height="360" rx="22" fill="url(#glow)"></rect>
+
+  <!-- Decorative terminal marks -->
+  <g opacity="0.55">
+    <circle cx="72" cy="65" r="4" fill="#22C55E"></circle>
+    <circle cx="90" cy="65" r="4" fill="#163C25"></circle>
+    <circle cx="108" cy="65" r="4" fill="#163C25"></circle>
+
+    <text x="72" y="308" fill="#396D4B" font-family="monospace" font-size="13">
+      context://optimized
+    </text>
+
+    <text x="1128" y="308" fill="#396D4B" font-family="monospace" font-size="13" text-anchor="end">
+      v0.1
+    </text>
+  </g>
+
+  <!-- Decorative lines -->
+  <path d="M70 108 H245" stroke="#22C55E" stroke-opacity="0.18"></path>
+  <path d="M955 108 H1130" stroke="#22C55E" stroke-opacity="0.18"></path>
+
+  <!-- Glow behind title -->
+  <ellipse cx="600" cy="153" rx="155" ry="38" fill="#22C55E" fill-opacity="0.08" filter="url(#dotGlow)"></ellipse>
+
+  <!-- Main title -->
+  <text x="600" y="173" text-anchor="middle" fill="#F2FFF6" font-family="Inter, Arial, Helvetica, sans-serif" font-weight="700" font-size="76" letter-spacing="-4" filter="url(#textGlow)">
+    cursory
+  </text>
+
+  <!-- Green cursor -->
+  <rect x="750" y="119" width="5" height="58" rx="2.5" fill="#22C55E"></rect>
+
+  <!-- Tagline -->
+  <text x="600" y="220" text-anchor="middle" fill="#A2B6A9" font-family="Inter, Arial, Helvetica, sans-serif" font-size="18" font-weight="400" letter-spacing="0.4">
+    Smarter context. Less waste. Better Cursor sessions.
+  </text>
+
+  <!-- Description -->
+  <text x="600" y="255" text-anchor="middle" fill="#667D6D" font-family="Inter, Arial, Helvetica, sans-serif" font-size="14">
+    A lightweight optimization layer for reducing AI context and token usage
+  </text>
+
+  <text x="600" y="277" text-anchor="middle" fill="#667D6D" font-family="Inter, Arial, Helvetica, sans-serif" font-size="14">
+    without getting in the way of your development workflow.
+  </text>
+
+  <!-- Bottom accent -->
+  <rect x="480" y="322" width="240" height="2" rx="1" fill="#22C55E" fill-opacity="0.18"></rect>
+
+  <circle cx="600" cy="323" r="3" fill="#22C55E"></circle>
+</svg>
