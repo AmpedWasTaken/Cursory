@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="320" viewBox="0 0 720 320" role="img" aria-label="Cache read tokens">
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text x="64" y="28" font-size="18" font-weight="700" fill="#0f172a" font-family="ui-sans-serif, system-ui, sans-serif">Cache read tokens</text>
+  <text x="64" y="46" font-size="12" fill="#64748b" font-family="ui-sans-serif, system-ui, sans-serif">Composer 2.5 · standard prompt · 20 runs · Composer 2.5</text>
+  <text x="688" y="28" text-anchor="end" font-size="14" font-weight="700" fill="#059669" font-family="ui-sans-serif, system-ui, sans-serif">-21.2%</text>
+  <text x="688" y="46" text-anchor="end" font-size="11" fill="#64748b" font-family="ui-sans-serif, system-ui, sans-serif">vs baseline avg</text>
+  <line x1="64" y1="200" x2="688" y2="200" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54" y="204" text-anchor="end" font-size="11" fill="#64748b" font-family="ui-sans-serif, system-ui, sans-serif">6.49k</text>
+<line x1="64" y1="152" x2="688" y2="152" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54" y="156" text-anchor="end" font-size="11" fill="#64748b" font-family="ui-sans-serif, system-ui, sans-serif">13.0k</text>
+<line x1="64" y1="104" x2="688" y2="104" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54" y="108" text-anchor="end" font-size="11" fill="#64748b" font-family="ui-sans-serif, system-ui, sans-serif">19.5k</text>
+<line x1="64" y1="56" x2="688" y2="56" stroke="#e2e8f0" stroke-width="1"/>
+<text x="54" y="60" text-anchor="end" font-size="11" fill="#64748b" font-family="ui-sans-serif, system-ui, sans-serif">26.0k</text>
+  <line x1="64" y1="248" x2="688" y2="248" stroke="#94a3b8" stroke-width="1.5"/>
+  <rect x="220" y="66.8679245283019" width="96" height="181.1320754716981" rx="6" fill="#64748b"/>
+  <rect x="436" y="105.31228340392761" width="96" height="142.6877165960724" rx="6" fill="#0d9488"/>
+  <line x1="268" y1="56" x2="268" y2="81.35849056603774" stroke="#64748b" stroke-width="2" opacity="0.55"/>
+<line x1="258" y1="56" x2="278" y2="56" stroke="#64748b" stroke-width="2" opacity="0.55"/>
+<line x1="258" y1="81.35849056603774" x2="278" y2="81.35849056603774" stroke="#64748b" stroke-width="2" opacity="0.55"/>
+  <line x1="484" y1="96.75102040816327" x2="484" y2="116.72730073161341" stroke="#0d9488" stroke-width="2" opacity="0.55"/>
+<line x1="474" y1="96.75102040816327" x2="494" y2="96.75102040816327" stroke="#0d9488" stroke-width="2" opacity="0.55"/>
+<line x1="474" y1="116.72730073161341" x2="494" y2="116.72730073161341" stroke="#0d9488" stroke-width="2" opacity="0.55"/>
+  <text x="268" y="58.8679245283019" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a" font-family="ui-sans-serif, system-ui, sans-serif">24.5k</text>
+  <text x="484" y="97.31228340392761" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a" font-family="ui-sans-serif, system-ui, sans-serif">19.3k</text>
+  <text x="268" y="270" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a" font-family="ui-sans-serif, system-ui, sans-serif">Baseline</text>
+  <text x="268" y="288" text-anchor="middle" font-size="11" fill="#64748b" font-family="ui-sans-serif, system-ui, sans-serif">n=10</text>
+  <text x="484" y="270" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a" font-family="ui-sans-serif, system-ui, sans-serif">Cursory</text>
+  <text x="484" y="288" text-anchor="middle" font-size="11" fill="#64748b" font-family="ui-sans-serif, system-ui, sans-serif">n=10</text>
+  <text x="360" y="308" text-anchor="middle" font-size="11" fill="#64748b" font-family="ui-sans-serif, system-ui, sans-serif">Bars = mean · whiskers = min–max across runs</text>
+</svg>

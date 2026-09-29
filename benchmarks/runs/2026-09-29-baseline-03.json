@@ -1,0 +1,19 @@
+{
+  "benchmark": {
+    "id": "standard-prompt",
+    "label": "Composer 2.5 · standard prompt"
+  },
+  "environment": {
+    "editor": "Cursor",
+    "model": "Composer 2.5",
+    "cursoryVersion": "0.1.0"
+  },
+  "variant": "baseline",
+  "metrics": {
+    "inputTokens": 9927,
+    "outputTokens": 416,
+    "cacheReadTokens": 23765,
+    "durationMs": 12378
+  },
+  "timestamp": "2026-09-29T09:10:00.000Z"
+}

@@ -7,44 +7,32 @@ Send the minimum context needed to solve the task. Keep a progressive path back 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Node.js 20+](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](package.json)
 [![pnpm](https://img.shields.io/badge/pnpm-10-orange.svg)](package.json)
-[![Benchmark](https://img.shields.io/badge/bench-98.3%25%20tokens%20avoided-success.svg)](#proof-benchmark)
+[![Benchmark](https://img.shields.io/badge/bench-multi--run%20charts-success.svg)](#benchmarks)
 
 ---
 
-## Proof (benchmark)
+## Benchmarks
 
-Run it yourself:
+Charts are generated from raw runs in [`benchmarks/runs/`](benchmarks/runs/) — mean bars, min–max whiskers, and n per variant so a single lucky chat cannot stand alone. Regenerate with `pnpm bench:charts`. See [`benchmarks/README.md`](benchmarks/README.md) to record new Cursor dashboard captures (`pnpm bench:record`).
+
+### Token usage
+
+![Token usage benchmark](./assets/benchmarks/tokens.svg)
+
+### Response time
+
+![Response time benchmark](./assets/benchmarks/duration.svg)
+
+### Cache usage
+
+![Cache benchmark](./assets/benchmarks/cache.svg)
 
 ```bash
-pnpm install
-pnpm benchmark
+pnpm bench:record -- --variant cursory --input 9119 --output 453 --cache 20430 --duration 14900
+pnpm bench:charts
 ```
 
-Latest local run on the built-in fixture suite (**12/12 tasks solved**, **100% raw recoverability**):
-
-| Scenario | Baseline | Cursory | Avoided |
-| --- | ---: | ---: | ---: |
-| Simple edit | 3,911 | 52 | **98.7%** |
-| Bug fix | 3,972 | 116 | **97.1%** |
-| Multi-file feature | 3,994 | 136 | **96.6%** |
-| Follow-up | 3,976 | 120 | **97.0%** |
-| Long conversation | 116,432 | 124 | **99.9%** |
-| Large codebase context | 65,864 | 88 | **99.9%** |
-| Repository discovery | 33 | 33 | 0.0% |
-| Large test output | 3,568 | 170 | **95.2%** |
-| Large log | 2,566 | 116 | **95.5%** |
-| Relevant code read | 3,494 | 188 | **94.6%** |
-| Repeated file read | 69 | 28 | **59.4%** |
-| Large git diff | 5,275 | 2,369 | **55.1%** |
-| **TOTAL** | **213,154** | **3,540** | **98.3%** |
-
-What “passed” means:
-
-- Every scenario still solves the fixture task (symbols, failures, markers stay visible)
-- Raw recovery checks are exact: store round-trip, `get_raw` search, `force_full` source
-- Pipeline scenarios also keep latency low (long conversation ~tens of ms on a laptop)
-
-> **Estimates vs billing.** Numbers use a ~4 chars/token heuristic on delivered text. They measure **context avoided before it hits the model**, not Cursor dashboard dollars. We do not claim invoice savings without live billing data.
+There is also an offline fixture suite (`pnpm benchmark`) that checks context reduction + 100% raw recoverability on synthetic tasks. That suite estimates delivered text (~4 chars/token); the charts above use Cursor usage metrics from repeated baseline vs Cursory agent runs.
 
 ---
 
@@ -119,14 +107,13 @@ Editor settings (sidebar, optimization mode, budgets) are also available under *
 ## Reproduce the numbers
 
 ```bash
-pnpm benchmark          # offline fixture suite (table above)
-pnpm test               # includes the same pass criteria in CI
-pnpm eval:live          # optional live scorecard helper — see eval/SCORECARD.md
+pnpm bench:charts       # aggregate runs → summary.json + SVG charts
+pnpm benchmark          # offline fixture suite (context estimates + recoverability)
+pnpm test
+pnpm eval:live          # hook activity helper — see eval/SCORECARD.md
 ```
 
-The offline suite covers simple edits, bug fixes, multi-file features, follow-ups, long conversations, large project context, discovery, tests, logs, reads, cache hits, and diffs.
-
-Live Cursor cannot replace the host conversation from a plugin. Offline scenarios may use replacement semantics for measurement; in live Cursor the safe strategy is **no unsolicited injection** — savings come from choosing a bounded Cursory path instead of the raw dump.
+Live Cursor cannot replace the host conversation from a plugin. Offline scenarios may use replacement semantics for measurement; in live Cursor savings come from choosing a bounded Cursory path instead of a raw dump.
 
 ## Privacy
 
