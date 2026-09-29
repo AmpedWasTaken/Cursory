@@ -1,0 +1,32 @@
+{
+  "model": "composer-2.5",
+  "workspace": "test/fixtures/mini-repo",
+  "notes": "New Agent chat per task. Same model both arms. Do not reuse a transcript.",
+  "tasks": [
+    {
+      "id": "small-edit",
+      "prompt": "In src/lib/util.ts, keep formatCurrency's name and two-decimal contract. If it already does that, say so in one sentence and stop.",
+      "expect": "Should stay on native Read of a small file. Cursory must not cap it."
+    },
+    {
+      "id": "symbol-hunt",
+      "prompt": "Where is refreshToken defined, and what does it return? Cite the exact function. Do not refactor.",
+      "expect": "smart_search or grep, then a bounded read. Success = names PaymentService.refreshToken."
+    },
+    {
+      "id": "noisy-test",
+      "prompt": "Run the project's tests if present. If there is no test runner, say that and stop. Report only failures.",
+      "expect": "smart_run or a capped shell. Success = no full passing-test dump in the reply."
+    },
+    {
+      "id": "wide-explore",
+      "prompt": "How does checkout payment work in this repo? Name the files and the main function. Do not edit.",
+      "expect": "Search then 1–3 file reads. Failure = reading the whole tree or every file."
+    },
+    {
+      "id": "follow-up",
+      "prompt": "Using only what you already know from this chat, what does refreshToken return? If you must re-read, say why.",
+      "expect": "Run in the SAME chat after symbol-hunt. Success = no second full-file read."
+    }
+  ]
+}

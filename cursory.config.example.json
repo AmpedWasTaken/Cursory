@@ -1,0 +1,34 @@
+{
+  "mode": "balanced",
+  "budgets": {
+    "workspaceMap": 2000,
+    "search": 3000,
+    "read": 5000,
+    "terminal": 4000,
+    "diff": 4000
+  },
+  "context": {
+    "maxInjectedTokens": 6000,
+    "recentConversationBudget": 2200,
+    "historicalSummaryBudget": 700,
+    "projectContextBudget": 2600,
+    "instructionsBudget": 150,
+    "safetyMargin": 300,
+    "debug": false,
+    "allowRegression": false
+  },
+  "cache": {
+    "enabled": true,
+    "maxSizeMb": 250,
+    "ttlHours": 24
+  },
+  "terminal": {
+    "retainRawMinutes": 60
+  },
+  "ignore": {
+    "extra": []
+  },
+  "privacy": {
+    "telemetry": false
+  }
+}

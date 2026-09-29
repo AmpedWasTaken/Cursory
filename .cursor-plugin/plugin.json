@@ -1,0 +1,17 @@
+{
+  "name": "cursory",
+  "version": "0.1.0",
+  "description": "Local-first Cursor plugin that reduces unnecessary LLM context with deterministic optimization and progressive raw recovery.",
+  "author": {
+    "name": "Cursory Contributors"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/AmpedWasTaken/cursory",
+  "keywords": [
+    "context",
+    "tokens",
+    "mcp",
+    "local-first",
+    "optimization"
+  ]
+}

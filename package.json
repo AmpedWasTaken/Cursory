@@ -1,0 +1,270 @@
+{
+  "name": "cursory",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local-first Cursor plugin that reduces unnecessary LLM context with deterministic optimization and progressive raw recovery.",
+  "type": "module",
+  "displayName": "Cursory",
+  "publisher": "cursory",
+  "categories": [
+    "Other",
+    "Machine Learning"
+  ],
+  "engines": {
+    "node": ">=20",
+    "vscode": "^1.96.0"
+  },
+  "bin": {
+    "cursory": "./dist/cli/index.js"
+  },
+  "main": "./dist/extension.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "activationEvents": [
+    "onView:cursory.sidebar",
+    "onCommand:cursory.openDashboard"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "cursory",
+          "title": "Cursory",
+          "icon": "media/cursory.svg"
+        }
+      ]
+    },
+    "views": {
+      "cursory": [
+        {
+          "type": "webview",
+          "id": "cursory.sidebar",
+          "name": "Cursory"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "cursory.openDashboard",
+        "title": "Cursory: Open Dashboard",
+        "icon": "$(pulse)"
+      },
+      {
+        "command": "cursory.enable",
+        "title": "Cursory: Enable"
+      },
+      {
+        "command": "cursory.disable",
+        "title": "Cursory: Disable"
+      },
+      {
+        "command": "cursory.toggle",
+        "title": "Cursory: Toggle"
+      },
+      {
+        "command": "cursory.showContextInspector",
+        "title": "Cursory: Show Context Inspector",
+        "icon": "$(inspect)"
+      },
+      {
+        "command": "cursory.showLastOptimization",
+        "title": "Cursory: Show Last Optimization",
+        "icon": "$(history)"
+      },
+      {
+        "command": "cursory.resetStatistics",
+        "title": "Cursory: Reset Statistics"
+      },
+      {
+        "command": "cursory.clearContextCache",
+        "title": "Cursory: Clear Context Cache"
+      },
+      {
+        "command": "cursory.runBenchmark",
+        "title": "Cursory: Run Benchmark"
+      },
+      {
+        "command": "cursory.openSettings",
+        "title": "Cursory: Open Settings",
+        "icon": "$(settings-gear)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "cursory.openSettings",
+          "when": "view == cursory.sidebar",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Cursory",
+      "properties": {
+        "cursory.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable automatic Cursory context optimization."
+        },
+        "cursory.optimizationMode": {
+          "type": "string",
+          "enum": [
+            "conservative",
+            "balanced",
+            "aggressive"
+          ],
+          "enumDescriptions": [
+            "Preserves more original context.",
+            "Recommended. Removes redundant and low-value context.",
+            "Uses stricter token budgets and stronger compression."
+          ],
+          "default": "balanced",
+          "description": "Controls how strongly Cursory optimizes context."
+        },
+        "cursory.statusBar.display": {
+          "type": "string",
+          "enum": [
+            "name",
+            "percent",
+            "saved",
+            "hidden"
+          ],
+          "default": "percent",
+          "description": "Controls the compact Cursory status bar display."
+        },
+        "cursory.context.maxTokens": {
+          "type": "number",
+          "minimum": 256,
+          "default": 6000,
+          "description": "Maximum Cursory-managed context tokens."
+        },
+        "cursory.context.recentConversation": {
+          "type": "number",
+          "minimum": 0,
+          "default": 2200
+        },
+        "cursory.context.historicalSummary": {
+          "type": "number",
+          "minimum": 0,
+          "default": 700
+        },
+        "cursory.context.project": {
+          "type": "number",
+          "minimum": 0,
+          "default": 2600
+        },
+        "cursory.context.overhead": {
+          "type": "number",
+          "minimum": 0,
+          "default": 150
+        },
+        "cursory.optimization.removeDuplicates": {
+          "type": "boolean",
+          "default": true
+        },
+        "cursory.optimization.compressConversation": {
+          "type": "boolean",
+          "default": true
+        },
+        "cursory.optimization.skipIrrelevant": {
+          "type": "boolean",
+          "default": true
+        },
+        "cursory.optimization.optimizeFiles": {
+          "type": "boolean",
+          "default": true
+        },
+        "cursory.optimization.reuseSummaries": {
+          "type": "boolean",
+          "default": true
+        },
+        "cursory.optimization.noNegativeSavings": {
+          "type": "boolean",
+          "default": true,
+          "description": "Use the original request whenever optimization would increase context usage."
+        },
+        "cursory.files.preferOpen": {
+          "type": "boolean",
+          "default": true
+        },
+        "cursory.files.useDependencies": {
+          "type": "boolean",
+          "default": true
+        },
+        "cursory.files.includeSmall": {
+          "type": "boolean",
+          "default": true
+        },
+        "cursory.files.largeFileThreshold": {
+          "type": "number",
+          "minimum": 1,
+          "default": 500,
+          "description": "Line count above which files are treated as large."
+        },
+        "cursory.files.maxPerRequest": {
+          "type": "number",
+          "minimum": 1,
+          "default": 8
+        },
+        "cursory.debug.enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show pipeline timing and advanced context diagnostics."
+        },
+        "cursory.debug.storeContext": {
+          "type": "boolean",
+          "default": false,
+          "description": "Store full debug context locally. This may retain source and prompts."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "prebuild": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "benchmark": "tsx scripts/benchmark.ts",
+    "eval:live": "tsx scripts/live-eval-summary.ts",
+    "install:local": "tsx scripts/install-local.ts",
+    "dev:mcp": "tsx src/index.ts"
+  },
+  "keywords": [
+    "cursor",
+    "mcp",
+    "context",
+    "tokens",
+    "local-first"
+  ],
+  "author": {
+    "name": "Cursory Contributors"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AmpedWasTaken/cursory"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.25.0",
+    "typescript": "^5.9.2",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",
+    "@types/node": "^22.18.6",
+    "@types/vscode": "^1.138.0",
+    "eslint": "^9.36.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.6.2",
+    "tsx": "^4.20.5",
+    "typescript-eslint": "^8.44.1",
+    "vitest": "^3.2.4"
+  },
+  "packageManager": "pnpm@10.18.1"
+}

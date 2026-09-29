@@ -1,0 +1,12 @@
+{
+  "name": "Observed Cursor ON/OFF regression, 2026-09-25",
+  "observed": {
+    "baselineConversationTokens": 12200,
+    "regressedConversationTokens": 18200,
+    "addedConversationTokens": 6000
+  },
+  "currentPrompt": "Continue the implementation without changing the existing constraints.",
+  "baselinePattern": "User constraint, assistant finding, exact source excerpt, tool result, and implementation decision already present in the Cursor conversation. ",
+  "duplicatePattern": "Cursory-generated wrapper repeating prior conversation, source excerpts, tool metadata, and workspace context. ",
+  "notes": "Only aggregate token measurements were available. Patterns model the measured sizes; they are not claimed to be an exported Cursor transcript."
+}
