@@ -15,5 +15,8 @@
     "cacheReadTokens": 82445,
     "durationMs": 105240
   },
-  "timestamp": "2026-09-29T08:14:10.447Z"
+  "timestamp": "2026-09-29T08:14:24.000Z",
+  "success": true,
+  "qualityScore": 100,
+  "estimatedCostUsd": 0.0886305
 }

@@ -3,7 +3,7 @@
 Two layers:
 
 1. **Cursor Agent A/B** (`pnpm cursory benchmark`) — real `agent -p` runs with/without Cursory  
-2. **Chart pipeline** (`pnpm bench:charts`) — aggregates `runs/*.json` into README SVGs  
+2. **Chart pipeline** (`pnpm bench:charts`) — aggregates `runs/*.json` into dark README SVGs  
 
 See [docs/AGENT-BENCHMARK.md](../docs/AGENT-BENCHMARK.md).
 
@@ -16,39 +16,29 @@ benchmarks/
 ├── summary.json           # generated aggregates
 └── generate-charts.ts
 assets/benchmarks/
-├── tokens.svg
-├── duration.svg
-└── cache.svg
+├── headline.svg           # tokens / cost / quality headlines
+├── grouped.svg            # Cursor OFF vs ON grouped bars
+├── savings.svg            # % reduction marketing bars
+├── quality-scatter.svg    # quality vs tokens
+├── tokens-over-runs.svg   # line chart across repeats
+└── cost-per-success.svg   # $/successful task
 ```
 
-## Agent A/B (preferred)
+All charts use a black background for GitHub contrast.
+
+## Agent A/B
 
 ```bash
 pnpm build && pnpm install:local
-pnpm cursory benchmark fix-session-redirect --runs 3
-# without Cursor CLI installed:
-pnpm cursory benchmark fix-session-redirect --dry-run --runs 2
+pnpm cursory benchmark fix-session-redirect --runs 10
 pnpm bench:charts
 ```
-
-Both arms go through Cursor Agent. The runner sets:
 
 | Arm | Env | Workspace MCP |
 | --- | --- | --- |
 | baseline | `CURSORY_ENABLED=0` | empty |
 | cursory | `CURSORY_ENABLED=1` | Cursory MCP → plugin `dist/index.js` |
 
-Each arm gets an isolated git worktree at the same commit.
+## Cost notes
 
-## Manual dashboard capture
-
-Still supported if you prefer recording Cursor UI usage numbers:
-
-```bash
-pnpm bench:record -- --variant cursory --input 9119 --output 453 --cache 20430 --duration 14900
-pnpm bench:charts
-```
-
-## Sample seed data
-
-`pnpm bench:seed` writes a deterministic 10×10 set for chart plumbing. Prefer real `cursory benchmark` output when available.
+README cost charts use a transparent token-rate heuristic (`src/benchmark/costModel.ts`). They are **not** Cursor invoice dollars. Quality is task success from verification / `expectText`.

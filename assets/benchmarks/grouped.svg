@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="360" viewBox="0 0 720 360" role="img" aria-label="Cursor vs Cursory">
+  <rect width="100%" height="100%" fill="#0a0a0a"/>
+  <rect x="12" y="12" width="696" height="336" rx="16" fill="#141414" stroke="#262626" stroke-width="1"/>
+  
+  <text x="28" y="40" font-size="18" font-weight="700" fill="#f5f5f5" font-family="ui-sans-serif, system-ui, sans-serif">Cursor vs Cursory</text>
+  <text x="28" y="58" font-size="12" fill="#a3a3a3" font-family="ui-sans-serif, system-ui, sans-serif">Bug fix · expired session redirect · 2 runs · composer-2.5</text>
+  <rect x="520" y="32" width="10" height="10" rx="2" fill="#94a3b8"/>
+  <text x="536" y="41" font-size="11" fill="#a3a3a3" font-family="ui-sans-serif, system-ui, sans-serif">Cursor (OFF)</text>
+  <rect x="620" y="32" width="10" height="10" rx="2" fill="#2dd4bf"/>
+  <text x="636" y="41" font-size="11" fill="#a3a3a3" font-family="ui-sans-serif, system-ui, sans-serif">Cursory (ON)</text>
+  
+  <text x="28" y="106" font-size="13" fill="#f5f5f5" font-family="ui-sans-serif, system-ui, sans-serif">Tokens</text>
+  <rect x="100" y="88" width="360" height="14" rx="3" fill="#94a3b8"/>
+  <rect x="100" y="106" width="212.92253298819372" height="14" rx="3" fill="#2dd4bf"/>
+  <text x="472" y="106" font-size="13" font-weight="700" fill="#34d399" font-family="ui-sans-serif, system-ui, sans-serif">-40.9%</text>
+  <text x="466" y="99" font-size="10" fill="#a3a3a3" font-family="ui-sans-serif, system-ui, sans-serif">15.8k</text>
+  <text x="318.9225329881937" y="117" font-size="10" fill="#f5f5f5" font-family="ui-sans-serif, system-ui, sans-serif">9.37k</text>
+
+  <text x="28" y="158" font-size="13" fill="#f5f5f5" font-family="ui-sans-serif, system-ui, sans-serif">Cost</text>
+  <rect x="100" y="140" width="360" height="14" rx="3" fill="#94a3b8"/>
+  <rect x="100" y="158" width="291.14749437270467" height="14" rx="3" fill="#2dd4bf"/>
+  <text x="472" y="158" font-size="13" font-weight="700" fill="#34d399" font-family="ui-sans-serif, system-ui, sans-serif">-19.1%</text>
+  <text x="466" y="151" font-size="10" fill="#a3a3a3" font-family="ui-sans-serif, system-ui, sans-serif">$0.089</text>
+  <text x="397.14749437270467" y="169" font-size="10" fill="#f5f5f5" font-family="ui-sans-serif, system-ui, sans-serif">$0.072</text>
+
+  <text x="28" y="210" font-size="13" fill="#f5f5f5" font-family="ui-sans-serif, system-ui, sans-serif">Latency</text>
+  <rect x="100" y="192" width="329.20077159689276" height="14" rx="3" fill="#94a3b8"/>
+  <rect x="100" y="210" width="360" height="14" rx="3" fill="#2dd4bf"/>
+  <text x="472" y="210" font-size="13" font-weight="700" fill="#f87171" font-family="ui-sans-serif, system-ui, sans-serif">+9.4%</text>
+  <text x="435.20077159689276" y="203" font-size="10" fill="#a3a3a3" font-family="ui-sans-serif, system-ui, sans-serif">105.2s</text>
+  <text x="466" y="221" font-size="10" fill="#f5f5f5" font-family="ui-sans-serif, system-ui, sans-serif">115.1s</text>
+
+  <text x="28" y="262" font-size="13" fill="#f5f5f5" font-family="ui-sans-serif, system-ui, sans-serif">Quality</text>
+  <rect x="100" y="244" width="360" height="14" rx="3" fill="#94a3b8"/>
+  <rect x="100" y="262" width="360" height="14" rx="3" fill="#2dd4bf"/>
+  <text x="472" y="262" font-size="13" font-weight="700" fill="#a3a3a3" font-family="ui-sans-serif, system-ui, sans-serif">0.0%</text>
+  <text x="466" y="255" font-size="10" fill="#a3a3a3" font-family="ui-sans-serif, system-ui, sans-serif">100%</text>
+  <text x="466" y="273" font-size="10" fill="#f5f5f5" font-family="ui-sans-serif, system-ui, sans-serif">100%</text>
+  <text x="28" y="336" font-size="11" fill="#a3a3a3" font-family="ui-sans-serif, system-ui, sans-serif">Cost estimated · not Cursor billing</text>
+</svg>

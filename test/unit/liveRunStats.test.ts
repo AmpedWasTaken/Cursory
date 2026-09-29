@@ -135,7 +135,7 @@ describe("live run stats", () => {
     expect(file.schemaVersion).toBe(1);
   });
 
-  it("renders README-ready SVG with run counts and change", () => {
+  it("renders dark README-ready SVG with run counts and change", () => {
     const svg = renderComparisonBarSvg({
       title: "Input token usage",
       subtitle: "n=20",
@@ -151,6 +151,7 @@ describe("live run stats", () => {
       cursoryRuns: 10,
     });
     expect(svg).toContain("<svg");
+    expect(svg).toContain("#0a0a0a");
     expect(svg).toContain("n=10");
     expect(svg).toContain("-20.7%");
     expect(svg).toContain("Baseline");

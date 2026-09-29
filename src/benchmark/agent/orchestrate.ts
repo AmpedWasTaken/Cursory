@@ -1,6 +1,7 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { createRequire } from "node:module";
+import { estimateCostUsd } from "../costModel.js";
 import type { BenchmarkMetrics, BenchmarkRun } from "../liveRunSchema.js";
 import type { BenchmarkVariant } from "../liveRunSchema.js";
 import { collectGitDiff, runVerification } from "./collect.js";
@@ -213,6 +214,9 @@ function toLiveRun(
     variant: record.variant,
     metrics: record.metrics,
     timestamp: record.timestamp,
+    success: record.success,
+    qualityScore: record.success ? 100 : 0,
+    estimatedCostUsd: estimateCostUsd(record.metrics),
   };
 }
 

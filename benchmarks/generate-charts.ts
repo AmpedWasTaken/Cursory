@@ -12,16 +12,15 @@ import {
 } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { renderAllReadmeCharts } from "../src/benchmark/liveRunCharts.js";
 import {
-  chartSpecsForSummary,
-  renderComparisonBarSvg,
-} from "../src/benchmark/liveRunCharts.js";
-import { parseBenchmarkRun } from "../src/benchmark/liveRunSchema.js";
+  parseBenchmarkRun,
+  type BenchmarkRun,
+} from "../src/benchmark/liveRunSchema.js";
 import {
   buildSummaryFile,
   roundSummaryFile,
 } from "../src/benchmark/liveRunStats.js";
-import type { BenchmarkRun } from "../src/benchmark/liveRunSchema.js";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = join(here, "..");
@@ -87,28 +86,25 @@ function main(): void {
 
   const primaryId = pickPrimaryId(summary.benchmarks);
   const primary = summary.benchmarks[primaryId]!;
-  const charts = chartSpecsForSummary(primary);
+  const charts = renderAllReadmeCharts(primary, runs);
 
   const written: string[] = [];
-  for (const [name, spec] of Object.entries(charts)) {
-    const svg = renderComparisonBarSvg(spec);
+  for (const [name, svg] of Object.entries(charts)) {
     const out = join(assetsDir, `${name}.svg`);
     writeFileSync(out, svg, "utf8");
     written.push(out);
-
-    // Also write per-benchmark copies for multi-suite repos.
     const keyed = join(assetsDir, `${primaryId}-${name}.svg`);
     writeFileSync(keyed, svg, "utf8");
     written.push(keyed);
   }
 
-  // Extra chart sets when multiple benchmark ids exist.
   for (const [id, bench] of Object.entries(summary.benchmarks)) {
     if (id === primaryId) continue;
-    const specs = chartSpecsForSummary(bench);
-    for (const [name, spec] of Object.entries(specs)) {
+    for (const [name, svg] of Object.entries(
+      renderAllReadmeCharts(bench, runs),
+    )) {
       const out = join(assetsDir, `${id}-${name}.svg`);
-      writeFileSync(out, renderComparisonBarSvg(spec), "utf8");
+      writeFileSync(out, svg, "utf8");
       written.push(out);
     }
   }

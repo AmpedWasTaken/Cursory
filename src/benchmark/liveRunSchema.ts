@@ -29,6 +29,12 @@ export interface BenchmarkRun {
   variant: BenchmarkVariant;
   metrics: BenchmarkMetrics;
   timestamp: string;
+  /** Task verification / expectText passed. */
+  success?: boolean;
+  /** 0–100 quality score (defaults from success when omitted). */
+  qualityScore?: number;
+  /** Optional precomputed USD estimate; charts can also derive from metrics. */
+  estimatedCostUsd?: number;
 }
 
 export type MetricKey = keyof BenchmarkMetrics;
@@ -147,6 +153,18 @@ export function parseBenchmarkRun(raw: unknown): BenchmarkRun | null {
 
   if (typeof o.timestamp !== "string" || !o.timestamp.trim()) return null;
 
+  const success = typeof o.success === "boolean" ? o.success : undefined;
+  const qualityScore =
+    typeof o.qualityScore === "number" && Number.isFinite(o.qualityScore)
+      ? o.qualityScore
+      : undefined;
+  const estimatedCostUsd =
+    typeof o.estimatedCostUsd === "number" &&
+    Number.isFinite(o.estimatedCostUsd) &&
+    o.estimatedCostUsd >= 0
+      ? o.estimatedCostUsd
+      : undefined;
+
   return {
     benchmark: { id: b.id.trim(), label: b.label.trim() },
     environment: {
@@ -162,5 +180,14 @@ export function parseBenchmarkRun(raw: unknown): BenchmarkRun | null {
       durationMs: m.durationMs as number,
     },
     timestamp: o.timestamp.trim(),
+    ...(success !== undefined ? { success } : {}),
+    ...(qualityScore !== undefined ? { qualityScore } : {}),
+    ...(estimatedCostUsd !== undefined ? { estimatedCostUsd } : {}),
   };
+}
+
+export function qualityOf(run: BenchmarkRun): number {
+  if (typeof run.qualityScore === "number") return run.qualityScore;
+  if (typeof run.success === "boolean") return run.success ? 100 : 0;
+  return 100;
 }

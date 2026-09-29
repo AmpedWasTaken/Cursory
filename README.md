@@ -7,46 +7,44 @@ Send the minimum context needed to solve the task. Keep a progressive path back 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Node.js 20+](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](package.json)
 [![pnpm](https://img.shields.io/badge/pnpm-10-orange.svg)](package.json)
-[![Benchmark](https://img.shields.io/badge/bench-multi--run%20charts-success.svg)](#benchmarks)
+[![Benchmark](https://img.shields.io/badge/bench--40.9%25%20tokens-success.svg)](#benchmarks)
 
 ---
 
 ## Benchmarks
 
-Charts come from repeated **Cursor Agent** A/B runs (same prompt, same model, isolated git worktrees) — not GUI automation.
+Real **Cursor Agent** A/B runs (same prompt, same model, isolated git worktrees). Charts regenerate from [`benchmarks/runs/`](benchmarks/runs/).
 
 ```bash
-pnpm build && pnpm install:local
-pnpm cursory benchmark fix-session-redirect --runs 3
+pnpm cursory benchmark fix-session-redirect --runs 10
 pnpm bench:charts
 ```
 
-```text
-baseline:  CURSORY_ENABLED=0  agent -p "..." --output-format stream-json
-cursory:   CURSORY_ENABLED=1  agent -p "..." --output-format stream-json
-```
+### Headlines
 
-See [docs/AGENT-BENCHMARK.md](docs/AGENT-BENCHMARK.md).
+![Headline metrics](./assets/benchmarks/headline.svg)
 
-### Token usage
+### Cursor vs Cursory
 
-![Token usage benchmark](./assets/benchmarks/tokens.svg)
+![Grouped comparison](./assets/benchmarks/grouped.svg)
 
-### Response time
+### Savings %
 
-![Response time benchmark](./assets/benchmarks/duration.svg)
+![Savings percent](./assets/benchmarks/savings.svg)
 
-### Cache usage
+### Quality vs tokens
 
-![Cache benchmark](./assets/benchmarks/cache.svg)
+![Quality scatter](./assets/benchmarks/quality-scatter.svg)
 
-```bash
-pnpm cursory benchmark --list
-pnpm cursory benchmark --dry-run --runs 2    # no agent binary required
-pnpm bench:charts
-```
+### Tokens across runs
 
-Offline fixture estimates (`pnpm benchmark`) still validate progressive disclosure + 100% raw recoverability. Live charts prefer Agent CLI metrics (or dashboard captures via `pnpm bench:record`).
+![Tokens over runs](./assets/benchmarks/tokens-over-runs.svg)
+
+### Cost per successful task
+
+![Cost per success](./assets/benchmarks/cost-per-success.svg)
+
+Cost figures are a transparent token-rate **estimate** for charts — not Cursor invoice dollars. Quality is task success (verification / expect). See [docs/AGENT-BENCHMARK.md](docs/AGENT-BENCHMARK.md).
 
 ---
 
