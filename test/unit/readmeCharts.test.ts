@@ -49,7 +49,7 @@ describe("readme chart suite", () => {
       "tokens-over-runs",
       "cost-per-success",
     ]) {
-      expect(charts[key]).toContain("#0a0a0a");
+      expect(charts[key]).toContain("#111111");
       expect(charts[key]).toContain("<svg");
     }
     expect(charts.grouped).toMatch(/Cursor|Tokens/);

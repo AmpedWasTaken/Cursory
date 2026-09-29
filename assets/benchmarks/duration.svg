@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="720" height="320" viewBox="0 0 720 320" role="img" aria-label="Token usage across runs">
-  <rect width="100%" height="100%" fill="#0a0a0a"/>
-  <rect x="12" y="12" width="696" height="296" rx="16" fill="#141414" stroke="#262626" stroke-width="1"/>
+  <rect width="100%" height="100%" rx="12" fill="#111111"/>
   
   <text x="28" y="40" font-size="18" font-weight="700" fill="#f5f5f5" font-family="ui-sans-serif, system-ui, sans-serif">Token usage across runs</text>
   <text x="28" y="58" font-size="12" fill="#a3a3a3" font-family="ui-sans-serif, system-ui, sans-serif">Same prompt · Cursor vs Cursory · n=1 pairs</text>
-  <line x1="64" y1="70" x2="64" y2="272" stroke="#525252"/>
-  <line x1="64" y1="272" x2="684" y2="272" stroke="#525252"/>
-  <text x="20" y="78" font-size="11" fill="#a3a3a3" font-family="ui-sans-serif, system-ui, sans-serif">Tokens</text>
-  <text x="20" y="74" font-size="10" fill="#a3a3a3" font-family="ui-sans-serif, system-ui, sans-serif">15.8k</text>
-  <polyline fill="none" stroke="#94a3b8" stroke-width="2.5" points="374,70"/><circle cx="374" cy="70" r="4" fill="#94a3b8"/>
-  <polyline fill="none" stroke="#2dd4bf" stroke-width="2.5" points="374,152.52680093440242"/><circle cx="374" cy="152.52680093440242" r="4" fill="#2dd4bf"/>
-  <text x="374" y="294" text-anchor="middle" font-size="10" fill="#a3a3a3" font-family="ui-sans-serif, system-ui, sans-serif">1</text>
+  <line x1="72" y1="78" x2="72" y2="272" stroke="#525252"/>
+  <line x1="72" y1="272" x2="684" y2="272" stroke="#525252"/>
+  <text x="14" y="175" text-anchor="middle" font-size="11" fill="#a3a3a3" font-family="ui-sans-serif, system-ui, sans-serif" transform="rotate(-90 14 175)">Tokens</text>
+  <text x="64" y="82" text-anchor="end" font-size="10" fill="#a3a3a3" font-family="ui-sans-serif, system-ui, sans-serif">15.8k</text>
+  <text x="64" y="272" text-anchor="end" font-size="10" fill="#a3a3a3" font-family="ui-sans-serif, system-ui, sans-serif">0</text>
+  <polyline fill="none" stroke="#94a3b8" stroke-width="2.5" points="378,78"/><circle cx="378" cy="78" r="4" fill="#94a3b8"/>
+  <polyline fill="none" stroke="#2dd4bf" stroke-width="2.5" points="378,157.2584127785845"/><circle cx="378" cy="157.2584127785845" r="4" fill="#2dd4bf"/>
+  <text x="378" y="294" text-anchor="middle" font-size="10" fill="#a3a3a3" font-family="ui-sans-serif, system-ui, sans-serif">1</text>
   <rect x="520" y="36" width="10" height="10" rx="2" fill="#94a3b8"/>
   <text x="536" y="45" font-size="11" fill="#a3a3a3" font-family="ui-sans-serif, system-ui, sans-serif">Cursor</text>
   <rect x="600" y="36" width="10" height="10" rx="2" fill="#2dd4bf"/>

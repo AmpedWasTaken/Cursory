@@ -4,14 +4,15 @@ import { qualityOf } from "./liveRunSchema.js";
 import { mean, percentChange } from "./liveRunStats.js";
 
 const FONT = "ui-sans-serif, system-ui, sans-serif";
-const BG = "#0a0a0a";
-const PANEL = "#141414";
+/** Single surface — no nested black+panel frame (avoids “double card” on GitHub). */
+const BG = "#111111";
+const CARD = "#1c1c1c";
 const BASELINE = "#94a3b8";
 const CURSORY = "#2dd4bf";
 const AXIS = "#525252";
 const TEXT = "#f5f5f5";
 const MUTED = "#a3a3a3";
-const GRID = "#262626";
+const GRID = "#2a2a2a";
 const GOOD = "#34d399";
 const BAD = "#f87171";
 
@@ -53,8 +54,7 @@ function svgShell(
 ): string {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeXml(title)}">
-  <rect width="100%" height="100%" fill="${BG}"/>
-  <rect x="12" y="12" width="${width - 24}" height="${height - 24}" rx="16" fill="${PANEL}" stroke="${GRID}" stroke-width="1"/>
+  <rect width="100%" height="100%" rx="12" fill="${BG}"/>
   ${body}
 </svg>
 `;
@@ -122,7 +122,7 @@ export function renderHeadlineSvg(
     .map((c, i) => {
       const x = startX + i * (cardW + gap);
       return `
-  <rect x="${x}" y="78" width="${cardW}" height="100" rx="12" fill="#1a1a1a" stroke="${GRID}"/>
+  <rect x="${x}" y="78" width="${cardW}" height="100" rx="12" fill="${CARD}" stroke="${GRID}"/>
   <text x="${x + cardW / 2}" y="118" text-anchor="middle" font-size="28" font-weight="700" fill="${c.color}" font-family="${FONT}">${escapeXml(c.value)}</text>
   <text x="${x + cardW / 2}" y="148" text-anchor="middle" font-size="13" fill="${MUTED}" font-family="${FONT}">${escapeXml(c.label)}</text>`;
     })
@@ -178,27 +178,29 @@ export function renderGroupedBarSvg(
 
   const width = 720;
   const height = 360;
-  const padL = 100;
+  const padL = 96;
   const padT = 88;
-  const rowH = 52;
-  const barMax = 360;
+  const rowH = 56;
+  const valueX = 520;
+  const changeX = 680;
+  const barMax = valueX - padL - 16;
 
   const rowsSvg = rows
     .map((row, i) => {
       const y = padT + i * rowH;
       const max = Math.max(row.off, row.on, 1e-9);
-      const offW = (row.off / max) * barMax;
-      const onW = (row.on / max) * barMax;
+      const offW = Math.max(4, (row.off / max) * barMax);
+      const onW = Math.max(4, (row.on / max) * barMax);
       const color = changeColor(
         row.label === "Quality" ? -row.change : row.change,
       );
       return `
-  <text x="28" y="${y + 18}" font-size="13" fill="${TEXT}" font-family="${FONT}">${escapeXml(row.label)}</text>
+  <text x="28" y="${y + 22}" font-size="13" fill="${TEXT}" font-family="${FONT}">${escapeXml(row.label)}</text>
   <rect x="${padL}" y="${y}" width="${offW}" height="14" rx="3" fill="${BASELINE}"/>
-  <rect x="${padL}" y="${y + 18}" width="${onW}" height="14" rx="3" fill="${CURSORY}"/>
-  <text x="${padL + barMax + 12}" y="${y + 18}" font-size="13" font-weight="700" fill="${color}" font-family="${FONT}">${escapeXml(formatChange(row.change))}</text>
-  <text x="${padL + offW + 6}" y="${y + 11}" font-size="10" fill="${MUTED}" font-family="${FONT}">${escapeXml(row.format(row.off))}</text>
-  <text x="${padL + onW + 6}" y="${y + 29}" font-size="10" fill="${TEXT}" font-family="${FONT}">${escapeXml(row.format(row.on))}</text>`;
+  <rect x="${padL}" y="${y + 20}" width="${onW}" height="14" rx="3" fill="${CURSORY}"/>
+  <text x="${valueX}" y="${y + 12}" text-anchor="start" font-size="11" fill="${MUTED}" font-family="${FONT}">${escapeXml(row.format(row.off))}</text>
+  <text x="${valueX}" y="${y + 32}" text-anchor="start" font-size="11" fill="${TEXT}" font-family="${FONT}">${escapeXml(row.format(row.on))}</text>
+  <text x="${changeX}" y="${y + 22}" text-anchor="end" font-size="13" font-weight="700" fill="${color}" font-family="${FONT}">${escapeXml(formatChange(row.change))}</text>`;
     })
     .join("\n");
 
@@ -206,10 +208,10 @@ export function renderGroupedBarSvg(
   const body = `
   <text x="28" y="40" font-size="18" font-weight="700" fill="${TEXT}" font-family="${FONT}">Cursor vs Cursory</text>
   <text x="28" y="58" font-size="12" fill="${MUTED}" font-family="${FONT}">${escapeXml(h.subtitle)}</text>
-  <rect x="520" y="32" width="10" height="10" rx="2" fill="${BASELINE}"/>
-  <text x="536" y="41" font-size="11" fill="${MUTED}" font-family="${FONT}">Cursor (OFF)</text>
-  <rect x="620" y="32" width="10" height="10" rx="2" fill="${CURSORY}"/>
-  <text x="636" y="41" font-size="11" fill="${MUTED}" font-family="${FONT}">Cursory (ON)</text>
+  <rect x="480" y="32" width="10" height="10" rx="2" fill="${BASELINE}"/>
+  <text x="496" y="41" font-size="11" fill="${MUTED}" font-family="${FONT}">Cursor (OFF)</text>
+  <rect x="590" y="32" width="10" height="10" rx="2" fill="${CURSORY}"/>
+  <text x="606" y="41" font-size="11" fill="${MUTED}" font-family="${FONT}">Cursory (ON)</text>
   ${rowsSvg}
   <text x="28" y="${height - 24}" font-size="11" fill="${MUTED}" font-family="${FONT}">Cost ${COST_MODEL.label}</text>`;
 
@@ -272,9 +274,9 @@ export function renderSavingsPercentSvg(
 export function renderQualityScatterSvg(runs: BenchmarkRun[]): string {
   const width = 720;
   const height = 340;
-  const padL = 70;
+  const padL = 72;
   const padR = 40;
-  const padT = 70;
+  const padT = 78;
   const padB = 50;
   const plotW = width - padL - padR;
   const plotH = height - padT - padB;
@@ -296,16 +298,20 @@ export function renderQualityScatterSvg(runs: BenchmarkRun[]): string {
       const y = yAt(qualityOf(r));
       const fill = r.variant === "cursory" ? CURSORY : BASELINE;
       const label = r.variant === "cursory" ? "C" : "B";
-      return `<circle cx="${x}" cy="${y}" r="8" fill="${fill}" stroke="${BG}" stroke-width="2"/><text x="${x + 12}" y="${y + 4}" font-size="11" fill="${MUTED}" font-family="${FONT}">${label}</text>`;
+      // Keep point labels below the top edge so they don't collide with the title.
+      const labelY = Math.min(y + 4, padT + plotH - 8);
+      return `<circle cx="${x}" cy="${y}" r="8" fill="${fill}" stroke="${BG}" stroke-width="2"/><text x="${x + 12}" y="${labelY}" font-size="11" fill="${MUTED}" font-family="${FONT}">${label}</text>`;
     })
     .join("\n");
 
+  const midY = padT + plotH / 2;
   const body = `
   <text x="28" y="40" font-size="18" font-weight="700" fill="${TEXT}" font-family="${FONT}">Quality vs token usage</text>
   <text x="28" y="58" font-size="12" fill="${MUTED}" font-family="${FONT}">Ideal: high quality, lower tokens (upper-left)</text>
   <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${padT + plotH}" stroke="${AXIS}"/>
   <line x1="${padL}" y1="${padT + plotH}" x2="${padL + plotW}" y2="${padT + plotH}" stroke="${AXIS}"/>
-  <text x="24" y="${padT + 8}" font-size="11" fill="${MUTED}" font-family="${FONT}">Quality</text>
+  <text x="14" y="${midY}" text-anchor="middle" font-size="11" fill="${MUTED}" font-family="${FONT}" transform="rotate(-90 14 ${midY})">Quality</text>
+  <text x="${padL - 8}" y="${yAt(maxY) + 4}" text-anchor="end" font-size="10" fill="${MUTED}" font-family="${FONT}">${Math.round(maxY)}</text>
   <text x="${padL + plotW}" y="${padT + plotH + 28}" text-anchor="end" font-size="11" fill="${MUTED}" font-family="${FONT}">Input tokens →</text>
   ${points}
   <rect x="520" y="36" width="10" height="10" rx="2" fill="${BASELINE}"/>
@@ -327,9 +333,9 @@ export function renderRunsLineSvg(runs: BenchmarkRun[]): string {
 
   const width = 720;
   const height = 320;
-  const padL = 64;
+  const padL = 72;
   const padR = 36;
-  const padT = 70;
+  const padT = 78;
   const padB = 48;
   const plotW = width - padL - padR;
   const plotH = height - padT - padB;
@@ -360,13 +366,15 @@ export function renderRunsLineSvg(runs: BenchmarkRun[]): string {
     return `<text x="${x}" y="${padT + plotH + 22}" text-anchor="middle" font-size="10" fill="${MUTED}" font-family="${FONT}">${i + 1}</text>`;
   }).join("\n");
 
+  const midY = padT + plotH / 2;
   const body = `
   <text x="28" y="40" font-size="18" font-weight="700" fill="${TEXT}" font-family="${FONT}">Token usage across runs</text>
   <text x="28" y="58" font-size="12" fill="${MUTED}" font-family="${FONT}">Same prompt · Cursor vs Cursory · n=${n} pairs</text>
   <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${padT + plotH}" stroke="${AXIS}"/>
   <line x1="${padL}" y1="${padT + plotH}" x2="${padL + plotW}" y2="${padT + plotH}" stroke="${AXIS}"/>
-  <text x="20" y="${padT + 8}" font-size="11" fill="${MUTED}" font-family="${FONT}">Tokens</text>
-  <text x="20" y="${yAt(maxY) + 4}" font-size="10" fill="${MUTED}" font-family="${FONT}">${escapeXml(formatTok(maxY))}</text>
+  <text x="14" y="${midY}" text-anchor="middle" font-size="11" fill="${MUTED}" font-family="${FONT}" transform="rotate(-90 14 ${midY})">Tokens</text>
+  <text x="${padL - 8}" y="${yAt(maxY) + 4}" text-anchor="end" font-size="10" fill="${MUTED}" font-family="${FONT}">${escapeXml(formatTok(maxY))}</text>
+  <text x="${padL - 8}" y="${padT + plotH}" text-anchor="end" font-size="10" fill="${MUTED}" font-family="${FONT}">0</text>
   ${poly(baseline, BASELINE)}
   ${poly(cursory, CURSORY)}
   ${xLabels}

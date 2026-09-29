@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="720" height="220" viewBox="0 0 720 220" role="img" aria-label="Cursory benchmark headlines">
-  <rect width="100%" height="100%" fill="#0a0a0a"/>
-  <rect x="12" y="12" width="696" height="196" rx="16" fill="#141414" stroke="#262626" stroke-width="1"/>
+  <rect width="100%" height="100%" rx="12" fill="#111111"/>
   
   <text x="36" y="44" font-size="18" font-weight="700" fill="#f5f5f5" font-family="ui-sans-serif, system-ui, sans-serif">CURSORY BENCHMARK</text>
   <text x="36" y="64" font-size="12" fill="#a3a3a3" font-family="ui-sans-serif, system-ui, sans-serif">Bug fix · expired session redirect · 2 runs · composer-2.5</text>
   
-  <rect x="36" y="78" width="200" height="100" rx="12" fill="#1a1a1a" stroke="#262626"/>
+  <rect x="36" y="78" width="200" height="100" rx="12" fill="#1c1c1c" stroke="#2a2a2a"/>
   <text x="136" y="118" text-anchor="middle" font-size="28" font-weight="700" fill="#34d399" font-family="ui-sans-serif, system-ui, sans-serif">-40.9%</text>
   <text x="136" y="148" text-anchor="middle" font-size="13" fill="#a3a3a3" font-family="ui-sans-serif, system-ui, sans-serif">Tokens saved</text>
 
-  <rect x="260" y="78" width="200" height="100" rx="12" fill="#1a1a1a" stroke="#262626"/>
+  <rect x="260" y="78" width="200" height="100" rx="12" fill="#1c1c1c" stroke="#2a2a2a"/>
   <text x="360" y="118" text-anchor="middle" font-size="28" font-weight="700" fill="#34d399" font-family="ui-sans-serif, system-ui, sans-serif">-19.1%</text>
   <text x="360" y="148" text-anchor="middle" font-size="13" fill="#a3a3a3" font-family="ui-sans-serif, system-ui, sans-serif">Cost saved</text>
 
-  <rect x="484" y="78" width="200" height="100" rx="12" fill="#1a1a1a" stroke="#262626"/>
+  <rect x="484" y="78" width="200" height="100" rx="12" fill="#1c1c1c" stroke="#2a2a2a"/>
   <text x="584" y="118" text-anchor="middle" font-size="28" font-weight="700" fill="#a3a3a3" font-family="ui-sans-serif, system-ui, sans-serif">0.0%</text>
   <text x="584" y="148" text-anchor="middle" font-size="13" fill="#a3a3a3" font-family="ui-sans-serif, system-ui, sans-serif">Quality difference</text>
 </svg>

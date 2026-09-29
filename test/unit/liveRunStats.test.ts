@@ -151,7 +151,7 @@ describe("live run stats", () => {
       cursoryRuns: 10,
     });
     expect(svg).toContain("<svg");
-    expect(svg).toContain("#0a0a0a");
+    expect(svg).toContain("#111111");
     expect(svg).toContain("n=10");
     expect(svg).toContain("-20.7%");
     expect(svg).toContain("Baseline");
