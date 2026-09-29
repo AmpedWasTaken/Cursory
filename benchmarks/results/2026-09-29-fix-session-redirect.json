@@ -13,190 +13,122 @@
     },
     "runs": 3
   },
-  "startedAt": "2026-09-29T07:42:50.241Z",
-  "finishedAt": "2026-09-29T07:42:53.679Z",
-  "dryRun": true,
+  "startedAt": "2026-09-29T07:51:06.839Z",
+  "finishedAt": "2026-09-29T07:55:56.743Z",
+  "dryRun": false,
   "environment": {
     "editor": "Cursor CLI",
     "cursoryVersion": "0.1.0",
-    "agentBinary": "agent"
+    "agentBinary": "C:\\Users\\RVPC004\\AppData\\Local\\cursor-agent\\agent.cmd"
   },
   "runs": [
     {
       "variant": "baseline",
       "index": 1,
-      "worktree": "C:\\Users\\RVPC004\\AppData\\Local\\Temp\\cursory-bench\\run-9DEayX\\baseline-01",
-      "timestamp": "2026-09-29T07:42:50.363Z",
+      "worktree": "C:\\Users\\RVPC004\\AppData\\Local\\Temp\\cursory-bench\\run-2rF7BJ\\baseline-01",
+      "timestamp": "2026-09-29T07:51:06.974Z",
       "success": true,
-      "durationMs": 8037,
+      "durationMs": 117984,
       "metrics": {
-        "inputTokens": 12037,
-        "outputTokens": 401,
-        "cacheReadTokens": 20037,
-        "durationMs": 8037
+        "inputTokens": 16316,
+        "outputTokens": 1114,
+        "cacheReadTokens": 101562,
+        "durationMs": 117984
       },
-      "metricsSource": "dry-run",
+      "metricsSource": "agent-usage",
       "verification": {
         "command": "npm test",
         "code": 0,
-        "stdout": "dry-run skip\n",
+        "stdout": "\n> test\n> node --test test/session.test.js\n\nTAP version 13\n# Subtest: missing session redirects to login\nok 1 - missing session redirects to login\n  ---\n  duration_ms: 15.2361\n  type: 'test'\n  ...\n# Subtest: valid session allows access\nok 2 - valid session allows access\n  ---\n  duration_ms: 0.2565\n  type: 'test'\n  ...\n# Subtest: expired session redirects to login\nok 3 - expired session redirects to login\n  ---\n  duration_ms: 0.1686\n  type: 'test'\n  ...\n1..3\n# tests 3\n# suites 0\n# pass 3\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 266.9596\n",
         "stderr": "npm warn Unknown env config \"verify-deps-before-run\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"_jsr-registry\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\n",
         "timedOut": false
       },
       "diff": {
-        "filesChanged": 0,
-        "insertions": 0,
-        "deletions": 0,
-        "patch": ""
+        "filesChanged": 1,
+        "insertions": 4,
+        "deletions": 2,
+        "patch": "diff --git a/src/session.js b/src/session.js\nindex 0f0a2e3..c13f73d 100644\n--- a/src/session.js\n+++ b/src/session.js\n@@ -13,7 +13,9 @@ export function requireSession(session, now = Date.now()) {\n     return { ok: false, redirect: \"/login\" };\n   }\n \n-  // BUG: expired sessions are treated as valid.\n-  // Fix: if session.expiresAt <= now, return { ok: false, redirect: \"/login\" }.\n+  if (session.expiresAt <= now) {\n+    return { ok: false, redirect: \"/login\" };\n+  }\n+\n   return { ok: true, userId: session.token };\n }\n"
       },
       "agent": {
         "exitCode": 0,
-        "sessionId": "dry-baseline-1",
+        "sessionId": "eedb8154-88ca-4708-a69f-11447c6c8523",
         "timedOut": false,
-        "toolCalls": 0
+        "toolCalls": 9
       }
     },
     {
       "variant": "cursory",
       "index": 1,
-      "worktree": "C:\\Users\\RVPC004\\AppData\\Local\\Temp\\cursory-bench\\run-9DEayX\\cursory-01",
-      "timestamp": "2026-09-29T07:42:51.225Z",
+      "worktree": "C:\\Users\\RVPC004\\AppData\\Local\\Temp\\cursory-bench\\run-2rF7BJ\\cursory-01",
+      "timestamp": "2026-09-29T07:53:28.770Z",
       "success": true,
-      "durationMs": 6537,
+      "durationMs": 124678,
       "metrics": {
-        "inputTokens": 9637,
-        "outputTokens": 401,
-        "cacheReadTokens": 16037,
-        "durationMs": 6537
+        "inputTokens": 15501,
+        "outputTokens": 1353,
+        "cacheReadTokens": 101216,
+        "durationMs": 124678
       },
-      "metricsSource": "dry-run",
+      "metricsSource": "agent-usage",
       "verification": {
         "command": "npm test",
         "code": 0,
-        "stdout": "dry-run skip\n",
+        "stdout": "\n> test\n> node --test test/session.test.js\n\nTAP version 13\n# Subtest: missing session redirects to login\nok 1 - missing session redirects to login\n  ---\n  duration_ms: 3.8032\n  type: 'test'\n  ...\n# Subtest: valid session allows access\nok 2 - valid session allows access\n  ---\n  duration_ms: 0.2005\n  type: 'test'\n  ...\n# Subtest: expired session redirects to login\nok 3 - expired session redirects to login\n  ---\n  duration_ms: 0.1574\n  type: 'test'\n  ...\n1..3\n# tests 3\n# suites 0\n# pass 3\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 117.1358\n",
         "stderr": "npm warn Unknown env config \"verify-deps-before-run\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"_jsr-registry\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\n",
         "timedOut": false
       },
       "diff": {
-        "filesChanged": 0,
-        "insertions": 0,
-        "deletions": 0,
-        "patch": ""
+        "filesChanged": 1,
+        "insertions": 4,
+        "deletions": 2,
+        "patch": "diff --git a/src/session.js b/src/session.js\nindex 0f0a2e3..fddf07e 100644\n--- a/src/session.js\n+++ b/src/session.js\n@@ -13,7 +13,9 @@ export function requireSession(session, now = Date.now()) {\n     return { ok: false, redirect: \"/login\" };\n   }\n \n-  // BUG: expired sessions are treated as valid.\n-  // Fix: if session.expiresAt <= now, return { ok: false, redirect: \"/login\" }.\n+  if (session.expiresAt != null && session.expiresAt <= now) {\n+    return { ok: false, redirect: \"/login\" };\n+  }\n+\n   return { ok: true, userId: session.token };\n }\n"
       },
       "agent": {
         "exitCode": 0,
-        "sessionId": "dry-cursory-1",
+        "sessionId": "39825852-810f-4dc7-9866-790da608958f",
         "timedOut": false,
-        "toolCalls": 0
-      }
-    },
-    {
-      "variant": "baseline",
-      "index": 2,
-      "worktree": "C:\\Users\\RVPC004\\AppData\\Local\\Temp\\cursory-bench\\run-9DEayX\\baseline-02",
-      "timestamp": "2026-09-29T07:42:52.119Z",
-      "success": true,
-      "durationMs": 8074,
-      "metrics": {
-        "inputTokens": 12074,
-        "outputTokens": 402,
-        "cacheReadTokens": 20074,
-        "durationMs": 8074
-      },
-      "metricsSource": "dry-run",
-      "verification": {
-        "command": "npm test",
-        "code": 0,
-        "stdout": "dry-run skip\n",
-        "stderr": "npm warn Unknown env config \"verify-deps-before-run\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"_jsr-registry\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\n",
-        "timedOut": false
-      },
-      "diff": {
-        "filesChanged": 0,
-        "insertions": 0,
-        "deletions": 0,
-        "patch": ""
-      },
-      "agent": {
-        "exitCode": 0,
-        "sessionId": "dry-baseline-2",
-        "timedOut": false,
-        "toolCalls": 0
-      }
-    },
-    {
-      "variant": "cursory",
-      "index": 2,
-      "worktree": "C:\\Users\\RVPC004\\AppData\\Local\\Temp\\cursory-bench\\run-9DEayX\\cursory-02",
-      "timestamp": "2026-09-29T07:42:52.977Z",
-      "success": true,
-      "durationMs": 6574,
-      "metrics": {
-        "inputTokens": 9674,
-        "outputTokens": 402,
-        "cacheReadTokens": 16074,
-        "durationMs": 6574
-      },
-      "metricsSource": "dry-run",
-      "verification": {
-        "command": "npm test",
-        "code": 0,
-        "stdout": "dry-run skip\n",
-        "stderr": "npm warn Unknown env config \"verify-deps-before-run\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"_jsr-registry\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\n",
-        "timedOut": false
-      },
-      "diff": {
-        "filesChanged": 0,
-        "insertions": 0,
-        "deletions": 0,
-        "patch": ""
-      },
-      "agent": {
-        "exitCode": 0,
-        "sessionId": "dry-cursory-2",
-        "timedOut": false,
-        "toolCalls": 0
+        "toolCalls": 9
       }
     }
   ],
   "summary": {
     "baseline": {
-      "runs": 2,
+      "runs": 1,
       "successRate": 1,
       "median": {
-        "inputTokens": 12055.5,
-        "outputTokens": 401.5,
-        "cacheReadTokens": 20055.5,
-        "durationMs": 8055.5
+        "inputTokens": 16316,
+        "outputTokens": 1114,
+        "cacheReadTokens": 101562,
+        "durationMs": 117984
       },
       "average": {
-        "inputTokens": 12055.5,
-        "outputTokens": 401.5,
-        "cacheReadTokens": 20055.5,
-        "durationMs": 8055.5
+        "inputTokens": 16316,
+        "outputTokens": 1114,
+        "cacheReadTokens": 101562,
+        "durationMs": 117984
       }
     },
     "cursory": {
-      "runs": 2,
+      "runs": 1,
       "successRate": 1,
       "median": {
-        "inputTokens": 9655.5,
-        "outputTokens": 401.5,
-        "cacheReadTokens": 16055.5,
-        "durationMs": 6555.5
+        "inputTokens": 15501,
+        "outputTokens": 1353,
+        "cacheReadTokens": 101216,
+        "durationMs": 124678
       },
       "average": {
-        "inputTokens": 9655.5,
-        "outputTokens": 401.5,
-        "cacheReadTokens": 16055.5,
-        "durationMs": 6555.5
+        "inputTokens": 15501,
+        "outputTokens": 1353,
+        "cacheReadTokens": 101216,
+        "durationMs": 124678
       }
     },
     "change": {
-      "inputTokensPercent": -19.907925842976233,
-      "outputTokensPercent": 0,
-      "cacheReadTokensPercent": -19.944653586298024,
-      "durationPercent": -18.620818074607413
+      "inputTokensPercent": -4.995096837460162,
+      "outputTokensPercent": 21.454219030520647,
+      "cacheReadTokensPercent": -0.3406786002638782,
+      "durationPercent": 5.673650664496881
     }
   }
 }

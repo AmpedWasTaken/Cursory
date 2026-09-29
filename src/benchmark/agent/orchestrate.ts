@@ -89,10 +89,14 @@ async function runOneVariant(
 
   const timestamp = new Date().toISOString();
   try {
-    const extraArgs = (process.env.CURSORY_AGENT_ARGS ?? "--trust")
+    const extraArgs = (process.env.CURSORY_AGENT_ARGS ?? "--trust --force")
       .split(/\s+/)
       .map((s) => s.trim())
       .filter(Boolean);
+    if (variant === "cursory") {
+      extraArgs.push("--plugin-dir", pluginRoot);
+      extraArgs.push("--approve-mcps");
+    }
 
     const cli = options.dryRun
       ? dryRunAgentResult(variant, index)

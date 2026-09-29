@@ -1,0 +1,19 @@
+{
+  "benchmark": {
+    "id": "fix-session-redirect",
+    "label": "Bug fix · expired session redirect"
+  },
+  "environment": {
+    "editor": "Cursor CLI",
+    "model": "composer-2.5",
+    "cursoryVersion": "0.1.0"
+  },
+  "variant": "cursory",
+  "metrics": {
+    "inputTokens": 15501,
+    "outputTokens": 1353,
+    "cacheReadTokens": 101216,
+    "durationMs": 124678
+  },
+  "timestamp": "2026-09-29T07:53:28.770Z"
+}
