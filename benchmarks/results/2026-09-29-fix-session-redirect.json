@@ -13,8 +13,8 @@
     },
     "runs": 3
   },
-  "startedAt": "2026-09-29T07:51:06.839Z",
-  "finishedAt": "2026-09-29T07:55:56.743Z",
+  "startedAt": "2026-09-29T08:14:10.153Z",
+  "finishedAt": "2026-09-29T08:18:36.238Z",
   "dryRun": false,
   "environment": {
     "editor": "Cursor CLI",
@@ -25,21 +25,21 @@
     {
       "variant": "baseline",
       "index": 1,
-      "worktree": "C:\\Users\\RVPC004\\AppData\\Local\\Temp\\cursory-bench\\run-2rF7BJ\\baseline-01",
-      "timestamp": "2026-09-29T07:51:06.974Z",
+      "worktree": "C:\\Users\\RVPC004\\AppData\\Local\\Temp\\cursory-bench\\run-PPIswD\\baseline-01",
+      "timestamp": "2026-09-29T08:14:10.447Z",
       "success": true,
-      "durationMs": 117984,
+      "durationMs": 105240,
       "metrics": {
-        "inputTokens": 16316,
-        "outputTokens": 1114,
-        "cacheReadTokens": 101562,
-        "durationMs": 117984
+        "inputTokens": 15839,
+        "outputTokens": 1092,
+        "cacheReadTokens": 82445,
+        "durationMs": 105240
       },
       "metricsSource": "agent-usage",
       "verification": {
         "command": "npm test",
         "code": 0,
-        "stdout": "\n> test\n> node --test test/session.test.js\n\nTAP version 13\n# Subtest: missing session redirects to login\nok 1 - missing session redirects to login\n  ---\n  duration_ms: 15.2361\n  type: 'test'\n  ...\n# Subtest: valid session allows access\nok 2 - valid session allows access\n  ---\n  duration_ms: 0.2565\n  type: 'test'\n  ...\n# Subtest: expired session redirects to login\nok 3 - expired session redirects to login\n  ---\n  duration_ms: 0.1686\n  type: 'test'\n  ...\n1..3\n# tests 3\n# suites 0\n# pass 3\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 266.9596\n",
+        "stdout": "\n> test\n> node --test test/session.test.js\n\nTAP version 13\n# Subtest: missing session redirects to login\nok 1 - missing session redirects to login\n  ---\n  duration_ms: 3.1746\n  type: 'test'\n  ...\n# Subtest: valid session allows access\nok 2 - valid session allows access\n  ---\n  duration_ms: 0.2054\n  type: 'test'\n  ...\n# Subtest: expired session redirects to login\nok 3 - expired session redirects to login\n  ---\n  duration_ms: 0.1609\n  type: 'test'\n  ...\n1..3\n# tests 3\n# suites 0\n# pass 3\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 430.7665\n",
         "stderr": "npm warn Unknown env config \"verify-deps-before-run\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"_jsr-registry\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\n",
         "timedOut": false
       },
@@ -51,29 +51,29 @@
       },
       "agent": {
         "exitCode": 0,
-        "sessionId": "eedb8154-88ca-4708-a69f-11447c6c8523",
+        "sessionId": "bc4cf1f3-7c05-430f-8a21-d3aa662a7992",
         "timedOut": false,
-        "toolCalls": 9
+        "toolCalls": 7
       }
     },
     {
       "variant": "cursory",
       "index": 1,
-      "worktree": "C:\\Users\\RVPC004\\AppData\\Local\\Temp\\cursory-bench\\run-2rF7BJ\\cursory-01",
-      "timestamp": "2026-09-29T07:53:28.770Z",
+      "worktree": "C:\\Users\\RVPC004\\AppData\\Local\\Temp\\cursory-bench\\run-PPIswD\\cursory-01",
+      "timestamp": "2026-09-29T08:16:19.877Z",
       "success": true,
-      "durationMs": 124678,
+      "durationMs": 115086,
       "metrics": {
-        "inputTokens": 15501,
-        "outputTokens": 1353,
-        "cacheReadTokens": 101216,
-        "durationMs": 124678
+        "inputTokens": 9368,
+        "outputTokens": 1067,
+        "cacheReadTokens": 91901,
+        "durationMs": 115086
       },
       "metricsSource": "agent-usage",
       "verification": {
         "command": "npm test",
         "code": 0,
-        "stdout": "\n> test\n> node --test test/session.test.js\n\nTAP version 13\n# Subtest: missing session redirects to login\nok 1 - missing session redirects to login\n  ---\n  duration_ms: 3.8032\n  type: 'test'\n  ...\n# Subtest: valid session allows access\nok 2 - valid session allows access\n  ---\n  duration_ms: 0.2005\n  type: 'test'\n  ...\n# Subtest: expired session redirects to login\nok 3 - expired session redirects to login\n  ---\n  duration_ms: 0.1574\n  type: 'test'\n  ...\n1..3\n# tests 3\n# suites 0\n# pass 3\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 117.1358\n",
+        "stdout": "\n> test\n> node --test test/session.test.js\n\nTAP version 13\n# Subtest: missing session redirects to login\nok 1 - missing session redirects to login\n  ---\n  duration_ms: 3.4171\n  type: 'test'\n  ...\n# Subtest: valid session allows access\nok 2 - valid session allows access\n  ---\n  duration_ms: 0.3477\n  type: 'test'\n  ...\n# Subtest: expired session redirects to login\nok 3 - expired session redirects to login\n  ---\n  duration_ms: 0.2271\n  type: 'test'\n  ...\n1..3\n# tests 3\n# suites 0\n# pass 3\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 1082.9898\n",
         "stderr": "npm warn Unknown env config \"verify-deps-before-run\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"_jsr-registry\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\n",
         "timedOut": false
       },
@@ -81,13 +81,13 @@
         "filesChanged": 1,
         "insertions": 4,
         "deletions": 2,
-        "patch": "diff --git a/src/session.js b/src/session.js\nindex 0f0a2e3..fddf07e 100644\n--- a/src/session.js\n+++ b/src/session.js\n@@ -13,7 +13,9 @@ export function requireSession(session, now = Date.now()) {\n     return { ok: false, redirect: \"/login\" };\n   }\n \n-  // BUG: expired sessions are treated as valid.\n-  // Fix: if session.expiresAt <= now, return { ok: false, redirect: \"/login\" }.\n+  if (session.expiresAt != null && session.expiresAt <= now) {\n+    return { ok: false, redirect: \"/login\" };\n+  }\n+\n   return { ok: true, userId: session.token };\n }\n"
+        "patch": "diff --git a/src/session.js b/src/session.js\nindex 0f0a2e3..c13f73d 100644\n--- a/src/session.js\n+++ b/src/session.js\n@@ -13,7 +13,9 @@ export function requireSession(session, now = Date.now()) {\n     return { ok: false, redirect: \"/login\" };\n   }\n \n-  // BUG: expired sessions are treated as valid.\n-  // Fix: if session.expiresAt <= now, return { ok: false, redirect: \"/login\" }.\n+  if (session.expiresAt <= now) {\n+    return { ok: false, redirect: \"/login\" };\n+  }\n+\n   return { ok: true, userId: session.token };\n }\n"
       },
       "agent": {
         "exitCode": 0,
-        "sessionId": "39825852-810f-4dc7-9866-790da608958f",
+        "sessionId": "a1640acb-b611-4129-8a55-968766422a27",
         "timedOut": false,
-        "toolCalls": 9
+        "toolCalls": 10
       }
     }
   ],
@@ -96,39 +96,39 @@
       "runs": 1,
       "successRate": 1,
       "median": {
-        "inputTokens": 16316,
-        "outputTokens": 1114,
-        "cacheReadTokens": 101562,
-        "durationMs": 117984
+        "inputTokens": 15839,
+        "outputTokens": 1092,
+        "cacheReadTokens": 82445,
+        "durationMs": 105240
       },
       "average": {
-        "inputTokens": 16316,
-        "outputTokens": 1114,
-        "cacheReadTokens": 101562,
-        "durationMs": 117984
+        "inputTokens": 15839,
+        "outputTokens": 1092,
+        "cacheReadTokens": 82445,
+        "durationMs": 105240
       }
     },
     "cursory": {
       "runs": 1,
       "successRate": 1,
       "median": {
-        "inputTokens": 15501,
-        "outputTokens": 1353,
-        "cacheReadTokens": 101216,
-        "durationMs": 124678
+        "inputTokens": 9368,
+        "outputTokens": 1067,
+        "cacheReadTokens": 91901,
+        "durationMs": 115086
       },
       "average": {
-        "inputTokens": 15501,
-        "outputTokens": 1353,
-        "cacheReadTokens": 101216,
-        "durationMs": 124678
+        "inputTokens": 9368,
+        "outputTokens": 1067,
+        "cacheReadTokens": 91901,
+        "durationMs": 115086
       }
     },
     "change": {
-      "inputTokensPercent": -4.995096837460162,
-      "outputTokensPercent": 21.454219030520647,
-      "cacheReadTokensPercent": -0.3406786002638782,
-      "durationPercent": 5.673650664496881
+      "inputTokensPercent": -40.85485194772397,
+      "outputTokensPercent": -2.2893772893772892,
+      "cacheReadTokensPercent": 11.469464491479169,
+      "durationPercent": 9.3557582668187
     }
   }
 }

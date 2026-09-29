@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-29T07:59:24.940Z",
+  "generatedAt": "2026-09-29T08:19:16.231Z",
   "schemaVersion": 1,
   "benchmarks": {
     "fix-session-redirect": {
@@ -24,58 +24,58 @@
       },
       "average": {
         "baseline": {
-          "inputTokens": 16316,
-          "outputTokens": 1114,
-          "cacheReadTokens": 101562,
-          "durationMs": 117984
+          "inputTokens": 15839,
+          "outputTokens": 1092,
+          "cacheReadTokens": 82445,
+          "durationMs": 105240
         },
         "cursory": {
-          "inputTokens": 15501,
-          "outputTokens": 1353,
-          "cacheReadTokens": 101216,
-          "durationMs": 124678
+          "inputTokens": 9368,
+          "outputTokens": 1067,
+          "cacheReadTokens": 91901,
+          "durationMs": 115086
         }
       },
       "median": {
         "baseline": {
-          "inputTokens": 16316,
-          "outputTokens": 1114,
-          "cacheReadTokens": 101562,
-          "durationMs": 117984
+          "inputTokens": 15839,
+          "outputTokens": 1092,
+          "cacheReadTokens": 82445,
+          "durationMs": 105240
         },
         "cursory": {
-          "inputTokens": 15501,
-          "outputTokens": 1353,
-          "cacheReadTokens": 101216,
-          "durationMs": 124678
+          "inputTokens": 9368,
+          "outputTokens": 1067,
+          "cacheReadTokens": 91901,
+          "durationMs": 115086
         }
       },
       "min": {
         "baseline": {
-          "inputTokens": 16316,
-          "outputTokens": 1114,
-          "cacheReadTokens": 101562,
-          "durationMs": 117984
+          "inputTokens": 15839,
+          "outputTokens": 1092,
+          "cacheReadTokens": 82445,
+          "durationMs": 105240
         },
         "cursory": {
-          "inputTokens": 15501,
-          "outputTokens": 1353,
-          "cacheReadTokens": 101216,
-          "durationMs": 124678
+          "inputTokens": 9368,
+          "outputTokens": 1067,
+          "cacheReadTokens": 91901,
+          "durationMs": 115086
         }
       },
       "max": {
         "baseline": {
-          "inputTokens": 16316,
-          "outputTokens": 1114,
-          "cacheReadTokens": 101562,
-          "durationMs": 117984
+          "inputTokens": 15839,
+          "outputTokens": 1092,
+          "cacheReadTokens": 82445,
+          "durationMs": 105240
         },
         "cursory": {
-          "inputTokens": 15501,
-          "outputTokens": 1353,
-          "cacheReadTokens": 101216,
-          "durationMs": 124678
+          "inputTokens": 9368,
+          "outputTokens": 1067,
+          "cacheReadTokens": 91901,
+          "durationMs": 115086
         }
       },
       "stdDev": {
@@ -93,10 +93,10 @@
         }
       },
       "change": {
-        "inputTokensPercent": -5,
-        "outputTokensPercent": 21.45,
-        "cacheReadTokensPercent": -0.34,
-        "durationPercent": 5.67
+        "inputTokensPercent": -40.85,
+        "outputTokensPercent": -2.29,
+        "cacheReadTokensPercent": 11.47,
+        "durationPercent": 9.36
       }
     }
   }

@@ -10,10 +10,10 @@
   },
   "variant": "baseline",
   "metrics": {
-    "inputTokens": 16316,
-    "outputTokens": 1114,
-    "cacheReadTokens": 101562,
-    "durationMs": 117984
+    "inputTokens": 15839,
+    "outputTokens": 1092,
+    "cacheReadTokens": 82445,
+    "durationMs": 105240
   },
-  "timestamp": "2026-09-29T07:51:06.974Z"
+  "timestamp": "2026-09-29T08:14:10.447Z"
 }
