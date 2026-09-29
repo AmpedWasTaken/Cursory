@@ -1,0 +1,202 @@
+{
+  "schemaVersion": 1,
+  "task": {
+    "id": "fix-session-redirect",
+    "label": "Bug fix · expired session redirect",
+    "repo": "benchmarks/fixtures/session-auth",
+    "commit": "",
+    "model": "composer-2.5",
+    "prompt": "There is a bug where expired sessions do not redirect to login. Find the problem in src/session.js and fix it. Run the tests when finished (`npm test`). Do not refactor unrelated code.",
+    "verification": {
+      "command": "npm test",
+      "timeoutMs": 60000
+    },
+    "runs": 3
+  },
+  "startedAt": "2026-09-29T07:42:50.241Z",
+  "finishedAt": "2026-09-29T07:42:53.679Z",
+  "dryRun": true,
+  "environment": {
+    "editor": "Cursor CLI",
+    "cursoryVersion": "0.1.0",
+    "agentBinary": "agent"
+  },
+  "runs": [
+    {
+      "variant": "baseline",
+      "index": 1,
+      "worktree": "C:\\Users\\RVPC004\\AppData\\Local\\Temp\\cursory-bench\\run-9DEayX\\baseline-01",
+      "timestamp": "2026-09-29T07:42:50.363Z",
+      "success": true,
+      "durationMs": 8037,
+      "metrics": {
+        "inputTokens": 12037,
+        "outputTokens": 401,
+        "cacheReadTokens": 20037,
+        "durationMs": 8037
+      },
+      "metricsSource": "dry-run",
+      "verification": {
+        "command": "npm test",
+        "code": 0,
+        "stdout": "dry-run skip\n",
+        "stderr": "npm warn Unknown env config \"verify-deps-before-run\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"_jsr-registry\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\n",
+        "timedOut": false
+      },
+      "diff": {
+        "filesChanged": 0,
+        "insertions": 0,
+        "deletions": 0,
+        "patch": ""
+      },
+      "agent": {
+        "exitCode": 0,
+        "sessionId": "dry-baseline-1",
+        "timedOut": false,
+        "toolCalls": 0
+      }
+    },
+    {
+      "variant": "cursory",
+      "index": 1,
+      "worktree": "C:\\Users\\RVPC004\\AppData\\Local\\Temp\\cursory-bench\\run-9DEayX\\cursory-01",
+      "timestamp": "2026-09-29T07:42:51.225Z",
+      "success": true,
+      "durationMs": 6537,
+      "metrics": {
+        "inputTokens": 9637,
+        "outputTokens": 401,
+        "cacheReadTokens": 16037,
+        "durationMs": 6537
+      },
+      "metricsSource": "dry-run",
+      "verification": {
+        "command": "npm test",
+        "code": 0,
+        "stdout": "dry-run skip\n",
+        "stderr": "npm warn Unknown env config \"verify-deps-before-run\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"_jsr-registry\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\n",
+        "timedOut": false
+      },
+      "diff": {
+        "filesChanged": 0,
+        "insertions": 0,
+        "deletions": 0,
+        "patch": ""
+      },
+      "agent": {
+        "exitCode": 0,
+        "sessionId": "dry-cursory-1",
+        "timedOut": false,
+        "toolCalls": 0
+      }
+    },
+    {
+      "variant": "baseline",
+      "index": 2,
+      "worktree": "C:\\Users\\RVPC004\\AppData\\Local\\Temp\\cursory-bench\\run-9DEayX\\baseline-02",
+      "timestamp": "2026-09-29T07:42:52.119Z",
+      "success": true,
+      "durationMs": 8074,
+      "metrics": {
+        "inputTokens": 12074,
+        "outputTokens": 402,
+        "cacheReadTokens": 20074,
+        "durationMs": 8074
+      },
+      "metricsSource": "dry-run",
+      "verification": {
+        "command": "npm test",
+        "code": 0,
+        "stdout": "dry-run skip\n",
+        "stderr": "npm warn Unknown env config \"verify-deps-before-run\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"_jsr-registry\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\n",
+        "timedOut": false
+      },
+      "diff": {
+        "filesChanged": 0,
+        "insertions": 0,
+        "deletions": 0,
+        "patch": ""
+      },
+      "agent": {
+        "exitCode": 0,
+        "sessionId": "dry-baseline-2",
+        "timedOut": false,
+        "toolCalls": 0
+      }
+    },
+    {
+      "variant": "cursory",
+      "index": 2,
+      "worktree": "C:\\Users\\RVPC004\\AppData\\Local\\Temp\\cursory-bench\\run-9DEayX\\cursory-02",
+      "timestamp": "2026-09-29T07:42:52.977Z",
+      "success": true,
+      "durationMs": 6574,
+      "metrics": {
+        "inputTokens": 9674,
+        "outputTokens": 402,
+        "cacheReadTokens": 16074,
+        "durationMs": 6574
+      },
+      "metricsSource": "dry-run",
+      "verification": {
+        "command": "npm test",
+        "code": 0,
+        "stdout": "dry-run skip\n",
+        "stderr": "npm warn Unknown env config \"verify-deps-before-run\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\nnpm warn Unknown env config \"_jsr-registry\". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.\n",
+        "timedOut": false
+      },
+      "diff": {
+        "filesChanged": 0,
+        "insertions": 0,
+        "deletions": 0,
+        "patch": ""
+      },
+      "agent": {
+        "exitCode": 0,
+        "sessionId": "dry-cursory-2",
+        "timedOut": false,
+        "toolCalls": 0
+      }
+    }
+  ],
+  "summary": {
+    "baseline": {
+      "runs": 2,
+      "successRate": 1,
+      "median": {
+        "inputTokens": 12055.5,
+        "outputTokens": 401.5,
+        "cacheReadTokens": 20055.5,
+        "durationMs": 8055.5
+      },
+      "average": {
+        "inputTokens": 12055.5,
+        "outputTokens": 401.5,
+        "cacheReadTokens": 20055.5,
+        "durationMs": 8055.5
+      }
+    },
+    "cursory": {
+      "runs": 2,
+      "successRate": 1,
+      "median": {
+        "inputTokens": 9655.5,
+        "outputTokens": 401.5,
+        "cacheReadTokens": 16055.5,
+        "durationMs": 6555.5
+      },
+      "average": {
+        "inputTokens": 9655.5,
+        "outputTokens": 401.5,
+        "cacheReadTokens": 16055.5,
+        "durationMs": 6555.5
+      }
+    },
+    "change": {
+      "inputTokensPercent": -19.907925842976233,
+      "outputTokensPercent": 0,
+      "cacheReadTokensPercent": -19.944653586298024,
+      "durationPercent": -18.620818074607413
+    }
+  }
+}
