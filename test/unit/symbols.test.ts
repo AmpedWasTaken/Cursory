@@ -14,4 +14,12 @@ describe("fallback symbol extraction", () => {
     expect(findSymbol(symbols, "processPayment")).toBeTruthy();
     expect(findSymbol(symbols, "checkout")?.kind).toBe("function");
   });
+
+  it("ends a long Dart class at its closing brace", () => {
+    const body = Array.from({ length: 600 }, (_, i) => `  int field${i} = ${i};`);
+    const content = ["class LongCubit extends Cubit<int> {", ...body, "}", ""].join("\n");
+    const found = findSymbol(extractSymbols(content, "lib/long_cubit.dart"), "LongCubit");
+    expect(found?.startLine).toBe(1);
+    expect(found?.endLine).toBe(602);
+  });
 });

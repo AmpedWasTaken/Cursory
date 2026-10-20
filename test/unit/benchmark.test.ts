@@ -1,7 +1,4 @@
-import { mkdtempSync, rmSync } from "node:fs";
-import { tmpdir } from "node:os";
-import { join } from "node:path";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
   benchmarkPassed,
   buildBenchmarkReport,
@@ -9,18 +6,6 @@ import {
 } from "../../src/benchmark/index.js";
 
 describe("Phase 9 benchmark", () => {
-  let dataDir = "";
-
-  beforeEach(() => {
-    dataDir = mkdtempSync(join(tmpdir(), "cursory-bench-test-"));
-    process.env.CURSORY_DATA_DIR = dataDir;
-  });
-
-  afterEach(() => {
-    rmSync(dataDir, { recursive: true, force: true });
-    delete process.env.CURSORY_DATA_DIR;
-  });
-
   it("beats baseline, recovers raw, and solves all tasks", () => {
     const report = buildBenchmarkReport();
     expect(report.scenarios).toHaveLength(12);

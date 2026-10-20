@@ -117,6 +117,7 @@ export const LANGUAGE_EXTENSIONS: Record<string, string> = {
   ".rs": "Rust",
   ".java": "Java",
   ".kt": "Kotlin",
+  ".dart": "Dart",
   ".php": "PHP",
   ".rb": "Ruby",
   ".cs": "C#",

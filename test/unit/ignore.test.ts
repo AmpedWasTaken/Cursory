@@ -35,4 +35,11 @@ describe("file classifier tails", () => {
     expect(classifyFile("src/debug.ts").kind).toBe("source");
     expect(prefersExactTail("src/lib/PaymentService.ts")).toBe(false);
   });
+
+  it("classifies Dart files as source so search indexes them", () => {
+    expect(classifyFile("lib/features/game/hangman_board.dart")).toEqual({
+      kind: "source",
+      language: "Dart",
+    });
+  });
 });

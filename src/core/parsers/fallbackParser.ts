@@ -68,7 +68,8 @@ export function extractSymbolsRegex(content: string): ExtractedSymbol[] {
 function findBlockEnd(lines: string[], startIdx: number): number {
   let depth = 0;
   let seen = false;
-  for (let i = startIdx; i < Math.min(lines.length, startIdx + 400); i++) {
+  // Scan to the real closing brace: a fixed window cut long classes to their first 40 lines.
+  for (let i = startIdx; i < lines.length; i++) {
     const line = lines[i]!;
     for (const ch of line) {
       if (ch === "{") {
